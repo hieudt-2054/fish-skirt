@@ -2,8 +2,12 @@
   <div class="main-layout">
     <navbar />
 
-    <div class="container mt-4">
-      <child />
+    <div class="mt-4">
+      <el-container>
+        <el-main>
+          <child />
+        </el-main>
+      </el-container>
     </div>
   </div>
 </template>

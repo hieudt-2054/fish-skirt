@@ -2,22 +2,34 @@
   <el-menu class="el-menu-demo" mode="horizontal">
     <el-submenu index="2">
       <template slot="title">Menu</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
+      <el-menu-item index="2-1">
+        <router-link :to="{ name: 'home' }" class="link">
+          <fa icon="cog" class="famb" />
+          Trang tổng quan
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="2-2">
+        <router-link :to="{ name: 'addFood' }" class="link">
+          <fa icon="cog" class="famb" />
+          Thêm thực phẩm
+        </router-link>
+      </el-menu-item>
       <el-menu-item index="2-3">item three</el-menu-item>
     </el-submenu>
-    <el-submenu index="3">
+    <el-submenu index="3" v-if="user">
       <template slot="title"><img :src="user.photo_url" class="rounded-circle profile-photo mr-1 image"> {{ user.name }}</template>
       <el-menu-item index="3-1">
-        <router-link :to="{ name: 'settings.profile' }">
-          <fa icon="cog" fixed-width />
+        <router-link :to="{ name: 'settings.profile' }" class="link">
+          <fa icon="cog" class="famb" />
           {{ $t('settings') }}
         </router-link>
       </el-menu-item>
       <el-menu-item index="3-2">
-        <a href="https://www.ele.me" target="_blank">Orders</a>
+        <a href="#" class="link" @click.prevent="logout">
+          <fa icon="sign-out-alt" class="famb" />
+          {{ $t('logout') }}
+        </a>
       </el-menu-item>
-      <el-menu-item index="3-3">item three</el-menu-item>
     </el-submenu>
   </el-menu>
   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
