@@ -26,13 +26,9 @@ axios.interceptors.response.use(response => response, error => {
   const { status } = error.response
 
   if (status >= 500) {
-    Swal.fire({
-      type: 'error',
-      title: i18n.t('error_alert_title'),
-      text: i18n.t('error_alert_text'),
-      reverseButtons: true,
-      confirmButtonText: i18n.t('ok'),
-      cancelButtonText: i18n.t('cancel')
+    this.$notify.error({
+      title: 'Error',
+      message: 'Có lỗi xảy ra mất rồi'
     })
   }
 

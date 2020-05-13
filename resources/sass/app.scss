@@ -6,3 +6,16 @@
 @import 'elements/navbar';
 @import 'elements/buttons';
 @import 'elements/transitions';
+
+.link {
+    color: gray;
+    text-decoration: none;
+    display: block !important;
+}
+.link:hover {
+    color: black !important;
+    text-decoration: none !important;
+}
+.famb {
+    margin-bottom: 2%;
+}
