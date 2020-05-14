@@ -94,13 +94,13 @@
       </el-col>
     </el-form-item>
     <el-form-item>
-      <el-col :span="8">
+      <el-col :span="10">
         <el-input v-model="form.uudiem" type="textarea" placeholder="Ưu điểm" />
       </el-col>
       <el-col class="line" :span="2">
 &nbsp;
       </el-col>
-      <el-col :span="8">
+      <el-col :span="10">
         <el-input v-model="form.khuyetdiem" type="textarea" placeholder="Khuyết điểm" />
       </el-col>
     </el-form-item>
@@ -144,12 +144,25 @@ export default {
   },
   watch: {
     async urlImport (newVal) {
+      let loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       var el = null
       await axios.post(`/api/fetch/`, {
         url: newVal
       })
         .then((response) => {
           el = cheerio.load(response.data.data)
+          loading.close()
+        }).catch(() => {
+          loading.close()
+          this.$notify.error({
+            title: 'Error',
+            message: 'Có lỗi xảy ra mất rồi'
+          })
         })
       this.form.tensp = this.ucwords(el('h1.pull-left').text().replace('Giá trị dinh dưỡng của ', ''))
       this.form.giamcan = parseFloat(el('.panel-body p strong').slice(0).eq(0).text().replace('%', ''))

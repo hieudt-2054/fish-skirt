@@ -25,12 +25,6 @@ axios.interceptors.request.use(request => {
 axios.interceptors.response.use(response => response, error => {
   const { status } = error.response
 
-  if (status >= 500) {
-    this.$notify.error({
-      title: 'Error',
-      message: 'Có lỗi xảy ra mất rồi'
-    })
-  }
 
   if (status === 401 && store.getters['auth/check']) {
     Swal.fire({
