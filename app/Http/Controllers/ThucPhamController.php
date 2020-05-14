@@ -81,7 +81,13 @@ class ThucPhamController extends Controller
      */
     public function destroy(ThucPham $thucPham)
     {
-        //
+        dd($thucPham);
+        return response()->json(['data' => $thucPham->delete()]);
+    }
+
+    public function deletetp(ThucPham $thucPham)
+    {
+        return response()->json(['data' => $thucPham->delete()]);
     }
 
     public function fetchData(Request $request)
