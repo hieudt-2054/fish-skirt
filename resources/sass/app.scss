@@ -12,6 +12,14 @@
     text-decoration: none;
     display: block !important;
 }
+.link-white {
+    color: white;
+    text-decoration: none;
+    display: block !important;
+}
+.link-white:hover {
+    text-decoration: none !important;
+}
 .link:hover {
     color: black !important;
     text-decoration: none !important;
@@ -22,3 +30,6 @@
 body {
     background-color: #e4e7eb !important;
 }
+.el-table .cell {
+    text-align: center !important;
+  }

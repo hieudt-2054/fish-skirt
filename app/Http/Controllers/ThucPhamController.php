@@ -85,9 +85,11 @@ class ThucPhamController extends Controller
         return response()->json(['data' => $thucPham->delete()]);
     }
 
-    public function deletetp(ThucPham $thucPham)
+    public function deletetp($thucPham)
     {
-        return response()->json(['data' => $thucPham->delete()]);
+        $data =ThucPham::where('id', $thucPham)->firstOrFail();
+
+        return response()->json(['data' => $data->delete()]);
     }
 
     public function fetchData(Request $request)

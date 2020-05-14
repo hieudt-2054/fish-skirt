@@ -1,116 +1,118 @@
 <template>
-  <el-form ref="form" :model="form">
-    <el-form-item>
-      <el-input v-model="urlImport" placeholder="Nhập link sản phẩm để tạo dữ liệu tự động (VD: http://www.thehinhonline.com.vn/food/nutrition/bananas-nutrition-fact)">
-        <template slot="prepend">
-          Auto
-        </template>
-      </el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="4">
-        <el-input v-model="form.tensp" placeholder="Tên SP" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.giamcan" placeholder="Giá trị giảm cân" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.suckhoe" placeholder="Giá trị sức khoẻ" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.tangcan" placeholder="Giá trị tăng cân" />
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="4">
-        <el-input v-model="form.nangluong" placeholder="Năng lượng" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.chatbeo" placeholder="Chất béo" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.chatxo" placeholder="Chất xơ" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.duong" placeholder="Đường" />
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="4">
-        <el-input v-model="form.vitamina" placeholder="Vitamin A" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.vitaminc" placeholder="Vitamin C" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.canxi" placeholder="Canxi" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.sat" placeholder="Sắt" />
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="4">
-        <el-input v-model="form.caloriefromprotein" placeholder="Calories từ protein" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.caloriefromcarb" placeholder="Calories từ carb" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="4">
-        <el-input v-model="form.caloriefromfat" placeholder="Calories từ Fat" />
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="10">
-        <el-input v-model="form.uudiem" type="textarea" placeholder="Ưu điểm" />
-      </el-col>
-      <el-col class="line" :span="2">
-&nbsp;
-      </el-col>
-      <el-col :span="10">
-        <el-input v-model="form.khuyetdiem" type="textarea" placeholder="Khuyết điểm" />
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">
-        Tạo
-      </el-button>
-      <el-button>Cancel</el-button>
-    </el-form-item>
-  </el-form>
+  <el-card class="box-card">
+    <el-form ref="form" :model="form">
+      <el-form-item>
+        <el-input v-model="urlImport" placeholder="Nhập link sản phẩm để tạo dữ liệu tự động (VD: http://www.thehinhonline.com.vn/food/nutrition/bananas-nutrition-fact)">
+          <template slot="prepend">
+            Auto
+          </template>
+        </el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="4">
+          <el-input v-model="form.tensp" placeholder="Tên SP" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.giamcan" placeholder="Giá trị giảm cân" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.suckhoe" placeholder="Giá trị sức khoẻ" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.tangcan" placeholder="Giá trị tăng cân" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="4">
+          <el-input v-model="form.nangluong" placeholder="Năng lượng" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.chatbeo" placeholder="Chất béo" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.chatxo" placeholder="Chất xơ" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.duong" placeholder="Đường" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="4">
+          <el-input v-model="form.vitamina" placeholder="Vitamin A" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.vitaminc" placeholder="Vitamin C" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.canxi" placeholder="Canxi" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.sat" placeholder="Sắt" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="4">
+          <el-input v-model="form.caloriefromprotein" placeholder="Calories từ protein" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.caloriefromcarb" placeholder="Calories từ carb" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="form.caloriefromfat" placeholder="Calories từ Fat" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="10">
+          <el-input v-model="form.uudiem" type="textarea" placeholder="Ưu điểm" />
+        </el-col>
+        <el-col class="line" :span="2">
+  &nbsp;
+        </el-col>
+        <el-col :span="10">
+          <el-input v-model="form.khuyetdiem" type="textarea" placeholder="Khuyết điểm" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">
+          Tạo
+        </el-button>
+        <el-button @click="formReset">Xoá Form</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
@@ -144,6 +146,9 @@ export default {
   },
   watch: {
     async urlImport (newVal) {
+      if (newVal === null || newVal === '') {
+        return;
+      }
       let loading = this.$loading({
         lock: true,
         text: 'Loading',
@@ -210,6 +215,7 @@ export default {
       let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val)
       let setNull = obj => setAll(obj, null)
       setNull(this.form)
+      this.urlImport = null
     }
   }
 }

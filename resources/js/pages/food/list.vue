@@ -1,17 +1,23 @@
 <template>
   <el-table
     v-loading="loading"
-    :data="tableData"
+    :data="tableData.filter(data => !search || data.tensp.toLowerCase().includes(search.toLowerCase()))"
+    height="700"
     border
     style="width: 100%"
   >
     <el-table-column
       prop="tensp"
       label="Tên sản phẩm"
+      fixed
+      width="150"
+      sortable
     />
     <el-table-column
       prop="nangluong"
       label="Calories"
+      sortable
+      width="120"
     >
       <template slot-scope="scope">
         {{ scope.row.nangluong }}
@@ -19,6 +25,8 @@
     </el-table-column>
     <el-table-column
       prop="chatbeo"
+      sortable
+      width="120"
       label="Chất béo"
     >
       <template slot-scope="scope">
@@ -27,6 +35,8 @@
     </el-table-column>
     <el-table-column
       prop="chatxo"
+      sortable
+      width="120"
       label="Chất xơ"
     >
       <template slot-scope="scope">
@@ -35,7 +45,9 @@
     </el-table-column>
     <el-table-column
       prop="duong"
+      width="100"
       label="Đường"
+      sortable
     >
       <template slot-scope="scope">
         {{ scope.row.duong }} g
@@ -44,6 +56,8 @@
     <el-table-column
       prop="suckhoe"
       label="Giá trị sức khỏe"
+      sortable
+      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="26" :percentage="scope.row.suckhoe" status="success" />
@@ -52,6 +66,8 @@
     <el-table-column
       prop="giamcan"
       label="Giá trị giảm cân"
+      sortable
+      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="24" :percentage="scope.row.giamcan" status="warning"/>
@@ -60,13 +76,63 @@
     <el-table-column
       prop="tangcan"
       label="Giá trị tăng cân"
+      sortable
+      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="22" :percentage="scope.row.tangcan" status="exception"/>
       </template>
     </el-table-column>
     <el-table-column
-      label="Thao tác">
+      prop="vitamina"
+      label="Vitamin A"
+      sortable
+      width="130"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.vitamina }} %
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="vitamic"
+      label="Vitamin C"
+      sortable
+      width="130"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.vitaminc }} %
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="canxi"
+      sortable
+      label="Canxi"
+      width="110"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.canxi }} %
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="sat"
+      sortable
+      label="Sắt"
+      width="110"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.sat }} %
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Thao tác"
+      fixed="right"
+      width="200">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Tìm kiếm tên SP"/>
+      </template>
       <template slot-scope="scope">
         <el-button
           size="mini"
@@ -93,7 +159,8 @@ export default {
   data () {
     return {
       tableData: [],
-      loading: true
+      loading: true,
+      search: '',
     }
   },
   async mounted () {
@@ -134,3 +201,6 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+</style>

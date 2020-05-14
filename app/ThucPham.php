@@ -9,6 +9,7 @@ class ThucPham extends Model
     protected $table = "thucphams";
 
     protected $fillable = [
+        'id',
         'tensp',
         'nangluong',
         'chatbeo',

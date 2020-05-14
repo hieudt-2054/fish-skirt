@@ -34,7 +34,7 @@ add('shared_dirs', [
     'bootstrap/cache',
 ]);
 // Hosts
-host('13.229.122.70')
+host('18.136.212.43')
     ->user('deploy')
     ->stage('development')
     ->set('deploy_path', '~/{{application}}')
