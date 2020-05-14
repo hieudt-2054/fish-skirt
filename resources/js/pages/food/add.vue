@@ -145,9 +145,11 @@ export default {
   watch: {
     async urlImport (newVal) {
       var el = null
-      await axios.get(newVal)
+      await axios.post(`/api/fetch/`, {
+        url: newVal
+      })
         .then((response) => {
-          el = cheerio.load(response.data)
+          el = cheerio.load(response.data.data)
         })
       this.form.tensp = this.ucwords(el('h1.pull-left').text().replace('Giá trị dinh dưỡng của ', ''))
       this.form.giamcan = parseFloat(el('.panel-body p strong').slice(0).eq(0).text().replace('%', ''))

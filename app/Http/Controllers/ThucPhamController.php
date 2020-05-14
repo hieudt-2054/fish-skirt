@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ThucPham;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class ThucPhamController extends Controller
 {
@@ -81,5 +82,12 @@ class ThucPhamController extends Controller
     public function destroy(ThucPham $thucPham)
     {
         //
+    }
+
+    public function fetchData(Request $request)
+    {
+        $client = new Client();
+        $result = $client->request('GET', $request->url);
+        return response()->json(['data' => $result->getBody()->getContents()]);
     }
 }
