@@ -36,6 +36,11 @@ class ThucPhamController extends Controller
      */
     public function store(Request $request)
     {
+        $unique = ThucPham::where('tensp', $request->tensp)->get();
+        if (count($unique)) {
+            return response()->json(['msg' => 'Bị trùng dữ liệu'], 500);
+        }
+
         return response()->json(['data' => ThucPham::create($request->all())]);
     }
 
@@ -71,18 +76,6 @@ class ThucPhamController extends Controller
     public function update(Request $request, ThucPham $thucPham)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ThucPham  $thucPham
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ThucPham $thucPham)
-    {
-        dd($thucPham);
-        return response()->json(['data' => $thucPham->delete()]);
     }
 
     public function deletetp($thucPham)

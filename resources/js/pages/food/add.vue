@@ -162,7 +162,7 @@ export default {
         .then((response) => {
           el = cheerio.load(response.data.data)
           loading.close()
-        }).catch(() => {
+        }).catch((err) => {
           loading.close()
           this.$notify.error({
             title: 'Error',
@@ -204,10 +204,10 @@ export default {
           })
           this.formReset()
         })
-        .catch(() => {
+        .catch((err) => {
           this.$notify.error({
             title: 'Error',
-            message: 'Có lỗi xảy ra mất rồi'
+            message: err.response.data.msg || 'Có lỗi xảy ra mất rồi'
           })
         })
     },
