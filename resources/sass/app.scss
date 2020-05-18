@@ -1,6 +1,6 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
-@import '~sweetalert2/src/sweetalert2';
+// @import '~sweetalert2/src/sweetalert2';
 
 @import 'elements/card';
 @import 'elements/navbar';
@@ -40,7 +40,9 @@ body {
 
 
 body  {
-    background-image: url("https://wallpaperaccess.com/full/105689.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("https://wallpaperaccess.com/full/105689.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   }

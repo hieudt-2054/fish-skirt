@@ -12,7 +12,7 @@
           <h5>Số sản phẩm trong hệ thống <span class="badge badge-secondary">{{ dashboard.soSanpham || 0 }}</span></h5>
         </div>
         <div class="col-md-3">
-          <h5>Trung bình số cân giảm 7 ngày qua <span class="badge badge-danger">0</span></h5>
+          <h5>Tr bình số cân giảm 7 ngày qua <span class="badge badge-danger">0</span></h5>
         </div>
       </div>
     </el-card>
