@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\PasswordController@update');
 });
 Route::resource('thucpham', 'ThucPhamController');
+Route::resource('eating', 'EatingController');
+Route::get('dashboard', 'DashboardController@getData');
 Route::get('xoatp/{id}', 'ThucPhamController@deletetp');
 
 Route::post('fetch/', 'ThucPhamController@fetchData');

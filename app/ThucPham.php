@@ -28,4 +28,9 @@ class ThucPham extends Model
         'uudiem',
         'khuyetdiem'
     ];
+
+    public function eatings()
+    {
+        return $this->hasMany(\App\Eating::class, 'thucpham_id', 'id');
+    }
 }

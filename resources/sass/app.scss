@@ -28,8 +28,12 @@
     margin-bottom: 2%;
 }
 body {
-    background-color: #e4e7eb !important;
+    background-color: #49524b !important;
 }
 .el-table .cell {
     text-align: center !important;
   }
+::placeholder {
+    color: black !important;
+    opacity: 0.8;
+}

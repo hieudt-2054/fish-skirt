@@ -10,7 +10,7 @@
       prop="tensp"
       label="Tên sản phẩm"
       fixed
-      width="150"
+      width="200"
       sortable
     />
     <el-table-column

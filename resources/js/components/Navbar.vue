@@ -17,6 +17,11 @@
           Danh sách thực phẩm
         </router-link>
       </el-menu-item>
+      <el-menu-item index="2-4">
+        <router-link :to="{ name: 'addHistory' }" class="link">
+          Thêm lịch sử ăn
+        </router-link>
+      </el-menu-item>
     </el-submenu>
     <el-submenu index="3" v-if="user">
       <template slot="title"><img :src="user.photo_url" class="rounded-circle profile-photo mr-1 image"> {{ user.name }}</template>

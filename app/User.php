@@ -105,4 +105,9 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     {
         return [];
     }
+
+    public function eatings()
+    {
+        return $this->hasMany(\App\Eating::class, 'user_id', 'id');
+    }
 }
