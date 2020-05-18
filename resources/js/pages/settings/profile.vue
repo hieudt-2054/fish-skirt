@@ -1,11 +1,11 @@
 <template>
   <card :title="$t('your_info')">
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
+      <alert-success :form="form" message="Dữ liệu cập nhật thành công" />
 
       <!-- Name -->
       <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
+        <label class="col-md-3 col-form-label text-md-right">Tên người dùng</label>
         <div class="col-md-7">
           <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
           <has-error :form="form" field="name" />
@@ -21,11 +21,38 @@
         </div>
       </div>
 
+      <!-- Cân nặng gốc -->
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">Cân nặng gốc</label>
+        <div class="col-md-7">
+          <input v-model="form.cannang_from" :class="{ 'is-invalid': form.errors.has('cannang_from') }" class="form-control" type="number" name="cannang_from">
+          <has-error :form="form" field="cannang_from" />
+        </div>
+      </div>
+
+      <!-- Cân nặng gốc -->
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">Cân nặng mong muốn</label>
+        <div class="col-md-7">
+          <input v-model="form.cannang_to" :class="{ 'is-invalid': form.errors.has('cannang_to') }" class="form-control" type="number" name="cannang_to">
+          <has-error :form="form" field="cannang_to" />
+        </div>
+      </div>
+
+      <!-- calo on day -->
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">Số calo cần thiết 1 ngày</label>
+        <div class="col-md-7">
+          <input v-model="form.caloonday" :class="{ 'is-invalid': form.errors.has('caloonday') }" class="form-control" type="number" name="caloonday">
+          <has-error :form="form" field="caloonday" />
+        </div>
+      </div>
+
       <!-- Submit Button -->
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
           <v-button :loading="form.busy" type="success">
-            {{ $t('update') }}
+            Cập nhật
           </v-button>
         </div>
       </div>
@@ -47,7 +74,10 @@ export default {
   data: () => ({
     form: new Form({
       name: '',
-      email: ''
+      email: '',
+      cannang_from: '',
+      cannang_to: '',
+      caloonday: '',
     })
   }),
 

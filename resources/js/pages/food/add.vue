@@ -195,6 +195,13 @@ export default {
       })
     },
     onSubmit () {
+      var s = this.form
+      Object.keys(s).forEach(function(key) {
+          if(s[key] === null) {
+              s[key] = 0;
+          }
+      })
+
       axios.post('/api/thucpham/', this.form)
         .then(() => {
           this.$notify({

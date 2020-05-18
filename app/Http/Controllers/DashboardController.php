@@ -22,6 +22,7 @@ class DashboardController extends Controller
             'id' => $user->id,
             'soSanpham' => ThucPham::count(),
             'soCalo' => $calo,
+            'soCaloConLai' => $user->caloonday - $calo,
         ];
 
         return response()->json(['data' => $data]);
