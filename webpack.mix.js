@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs-extra')
 const mix = require('laravel-mix')
+var webpack = require('webpack');
+
 require('laravel-mix-versionhash')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
@@ -22,6 +24,7 @@ if (mix.inProduction()) {
 mix.webpackConfig({
   plugins: [
     // new BundleAnalyzerPlugin()
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
     extensions: ['.js', '.json', '.vue'],

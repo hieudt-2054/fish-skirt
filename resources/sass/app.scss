@@ -46,3 +46,8 @@ body  {
   -o-background-size: cover;
   background-size: cover;
   }
+
+  .scroll {
+    max-height: 442px;
+    overflow-y: auto;
+}
