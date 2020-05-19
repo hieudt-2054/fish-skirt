@@ -2,29 +2,17 @@
 	<div>
 		<el-card class="box-card mb-2">
 			<el-button type="primary" @click="createForm">
-					Thêm 1 dòng ăn uống<br/>
+					Thêm 1 dòng cân nặng<br/>
 			</el-button>
 		</el-card>
 		<el-card class="box-card d-flex" v-if="forms.length > 0">
 			<el-form :xs="24" :sm="24" :md="24" :lg="24" v-for="(form, index) in forms" v-bind:key="form.id">
 				<el-form-item>
-					<el-col>
-						<el-select v-model="form.thucpham_id" filterable placeholder="Chọn Sản Phẩm">
-							<el-option
-							v-for="item in product"
-							:key="item.id"
-							:label="item.value"
-							:value="item.id">
-							</el-option>
-						</el-select>
-					</el-col>
-					</el-form-item>
-				<el-form-item>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24">
-						<el-input v-model="form.sogram" placeholder="Số Gram hoặc ML">
+						<el-input v-model="form.socan" placeholder="Số Cân">
 							<template slot="prepend">
-            		g/ML
-          		</template>
+                                KG
+                            </template>
 						</el-input>
 					</el-col>
 				</el-form-item>
@@ -35,7 +23,7 @@
 							type="date"
 							placeholder="Chọn ngày"
 							format="dd/MM/yyyy"
-      				value-format="dd/MM/yyyy"
+      				        value-format="dd/MM/yyyy"
 							>
 						</el-date-picker>
 						<el-button v-if="index != 0" type="danger" @click="removeForm(index)"><fa icon="trash" /></el-button>
@@ -59,40 +47,19 @@ export default {
     return {
       state: '',
       product: [],
-			forms: [],
-			 pickerOptions: {
-          shortcuts: [{
-            text: 'Ngày hôm nay',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }]
-        },
+	  forms: [],
     }
   },
   async mounted () {
-			this.createForm();
-      await axios.get(`/api/thucpham`)
-      .then((response) => {
-        this.product = response.data.map(({id, tensp}) => ({ id, value: tensp }));
-        this.loading = false
-      })
-      .catch((e) => {
-          console.log(e);
-        this.$notify.error({
-          title: 'Error',
-          message: 'Có lỗi xảy ra mất rồi'
-        })
-        this.loading = false
-      })
+	this.createForm();
   },
   methods: {
     onSubmit () {
-      axios.post('/api/eating/', this.forms)
+      axios.post('/api/cannang/', this.forms)
         .then(() => {
           this.$notify({
             title: 'Success',
-            message: 'Thêm mới sản phẩm thành công',
+            message: 'Thêm mới cân nặng thành công',
             type: 'success'
           })
           this.formReset()
@@ -109,8 +76,7 @@ export default {
     },
     createForm () {
         this.forms.push({
-            thucpham_id: null,
-            sogram: null,
+            socan: null,
             ngay: moment().subtract(0, 'days').format('DD/MM/YYYY')
         });
 		},

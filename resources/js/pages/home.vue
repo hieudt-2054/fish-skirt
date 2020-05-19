@@ -12,14 +12,14 @@
           <h5>Số sản phẩm trong hệ thống <span class="badge badge-secondary">{{ dashboard.soSanpham || 0 }}</span></h5>
         </div>
         <div class="col-md-3">
-          <h5>Tr bình số cân giảm 7 ngày qua <span class="badge badge-danger">0</span></h5>
+          <h5>Lần cân nhỏ nhất 7 ngày qua <span class="badge badge-danger">{{ Math.min.apply(null, dashboard.weight7Day) }} KG</span></h5>
         </div>
       </div>
     </el-card>
     <div class="row mt-3">
       <div class="col-md-6">
         <el-card class="box-card">
-          <area-chart v-if="loaded" :dataSet="dashboard.calo7Day"/>
+          <area-chart v-if="loaded" :type=1 :label="'Lượng calo hấp thụ trong 7 ngày gần đây'" :dataSet="dashboard.calo7Day"/>
         </el-card>
       </div>
       <div class="col-md-6" v-if="loaded">
@@ -28,6 +28,22 @@
             <h5 v-for="(item, index) in dashboard.soCalo.history">
               Bạn đã hấp thụ <span class="badge badge-success">{{ fixedNumber(item.calo) }} calo</span> từ 
               <span class="badge badge-secondary">{{ item.name }}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <el-card class="box-card">
+          <area-chart v-if="loaded" :label="'Chỉ số cân thấp nhất trong 7 ngày gần đây'" :dataSet="dashboard.weight7Day"/>
+        </el-card>
+      </div>
+      <div class="col-md-6" v-if="loaded">
+        <div class="card scroll">
+          <div class="card-body">
+            <h5 v-for="(item, index) in dashboard.weightInDay">
+              Bạn vừa cân được <span class="badge badge-success">{{ fixedNumber(item) }} Kg</span>
             </h5>
           </div>
         </div>

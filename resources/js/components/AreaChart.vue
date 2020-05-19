@@ -4,7 +4,7 @@ import moment from "moment";
 
 export default {
   extends: Line,
-  props: ['dataSet'],
+  props: ['label', 'dataSet', 'type'],
   
   data() {
     return {
@@ -43,12 +43,12 @@ export default {
         ],
         datasets: [
           {
-            label: "Lượng calo hấp thụ trong 7 ngày gần đây",
-            borderColor: "#FC2525",
+            label: this.label,
+            borderColor: this.type === 1 ? "#FC2525" : "#05CBE1",
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "white",
-            backgroundColor: this.gradient,
+            backgroundColor: this.type === 1 ? this.gradient : this.gradient2,
             data: this.dataSet
           },
         ]

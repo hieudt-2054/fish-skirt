@@ -14,12 +14,16 @@ class DashboardController extends Controller
         $user = Auth::user();
         $now = date('Y-m-d');
         $calo = $this->getCaloByDate($now);
+        $weightNow = $this->getWeightByDate($now);
         $calo7Day = [];
+        $weight7Day = [];
         for ($i=6; $i > 0; $i--) { 
             $time = date('Y-m-d', strtotime("-{$i} day"));
             $calo7Day[] = $this->getCaloByDate($time)['calo'];
+            $weight7Day[] = $this->getWeightByDate($time)['socan'];
         }
         $calo7Day[] = $calo['calo'];
+        $weight7Day[] = $weightNow['socan'];
 
         $data = [
             'id' => $user->id,
@@ -27,6 +31,8 @@ class DashboardController extends Controller
             'soCalo' => $calo,
             'soCaloConLai' => $user->caloonday - $calo['calo'],
             'calo7Day' => $calo7Day,
+            'weight7Day' => $weight7Day,
+            'weightInDay' => $this->getWeightByDate($now, true),
         ];
 
         return response()->json(['data' => $data]);
@@ -56,5 +62,23 @@ class DashboardController extends Controller
         }
 
         return ['history' => $history, 'calo' => $calo];
+    }
+
+    public function getWeightByDate($ngay, $showDay = false)
+    {
+        $user = Auth::user();
+        $min = 100;
+        $history = [];
+        $dataEat = $user->cannangs()->where('ngay', $ngay)->get();
+        foreach ($dataEat as $item) {
+            if ($item->socan <= $min) {
+                $min = $item->socan;
+            }
+            $history[] = $item->socan;
+        }
+        if ($showDay) {
+            return $history;
+        }
+        return ['date' => $ngay, 'socan' => $min == 100 ? $user->cannang_from : $min];
     }
 }

@@ -22,6 +22,11 @@
           Thêm lịch sử ăn
         </router-link>
       </el-menu-item>
+      <el-menu-item index="2-5">
+        <router-link :to="{ name: 'addWeight' }" class="link">
+          Thêm lịch sử cân nặng
+        </router-link>
+      </el-menu-item>
     </el-submenu>
     <el-submenu index="3" v-if="user">
       <template slot="title"><img :src="user.photo_url" class="rounded-circle profile-photo mr-1 image"> {{ user.name }}</template>
