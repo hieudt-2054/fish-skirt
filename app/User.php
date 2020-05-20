@@ -115,4 +115,9 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     {
         return $this->hasMany(\App\CanNang::class, 'user_id', 'id');
     }
+
+    public function spends()
+    {
+        return $this->hasMany(\App\SpendDetail::class, 'user_id', 'id');
+    }
 }

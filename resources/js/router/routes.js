@@ -13,6 +13,8 @@ export default [
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
   { path: '/add-food', name: 'addFood', component: page('food/add.vue') },
   { path: '/add-history', name: 'addHistory', component: page('food/history.vue') },
+  { path: '/spend-manage', name: 'spendIndex', component: page('spend.vue') },
+  { path: '/spend-add', name: 'spendAdd', component: page('spend/add.vue') },
   { path: '/add-weight', name: 'addWeight', component: page('food/weight.vue') },
   { path: '/list-food', name: 'listFood', component: page('food/list.vue') },
   { path: '/home', name: 'home', component: page('home.vue') },

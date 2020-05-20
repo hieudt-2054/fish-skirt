@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\ThucPham;
+use App\SpendDetail;
 use App\Eating;
 use Illuminate\Http\Request;
 
@@ -81,4 +82,33 @@ class DashboardController extends Controller
         }
         return ['date' => $ngay, 'socan' => $min == 100 ? $user->cannang_from : $min];
     }
+
+    public function getDataSpend()
+    {
+        $user = Auth::user();
+        $now = date('Y-m-d');
+        $thu = $this->getSpendByDate($now, SpendDetail::THU);
+        $chi = $this->getSpendByDate($now, SpendDetail::CHI);
+
+        $data = [
+            'id' => $user->id,
+            'thu' => $thu,
+            'chi' => $chi,
+        ];
+
+        return response()->json(['data' => $data]);
+    }
+
+    public function getSpendByDate($ngay, $type)
+    {
+        $user = Auth::user();
+        $total = 0;
+        $dataEat = $user->spends()->where('ngay', $ngay)->where('loai_id', $type)->get();
+        foreach ($dataEat as $item) {
+            $total += $item->sotien;
+        }
+
+        return $total;
+    }
+
 }

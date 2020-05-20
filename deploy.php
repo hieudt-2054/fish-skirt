@@ -65,7 +65,7 @@ task('clear-config', [
     'artisan:config:cache',
     'artisan:view:clear',
     'artisan:view:cache',
-    // 'artisan:migrate',
+    'artisan:migrate',
 ]);
 task('deploy', [
     // outputs the branch and IP address to the command line

@@ -26,8 +26,12 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::resource('thucpham', 'ThucPhamController');
 Route::resource('eating', 'EatingController');
 Route::resource('cannang', 'CanNangController');
+Route::resource('spendcategory', 'SpendCategoryController');
+Route::resource('spend', 'SpendDetailController');
+
 
 Route::get('dashboard', 'DashboardController@getData');
+Route::get('dashboardspend', 'DashboardController@getDataSpend');
 Route::get('xoatp/{id}', 'ThucPhamController@deletetp');
 
 Route::post('fetch/', 'ThucPhamController@fetchData');

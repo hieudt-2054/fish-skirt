@@ -24,11 +24,14 @@
       </div>
       <div class="col-md-6" v-if="loaded">
         <div class="card scroll">
-          <div class="card-body">
+          <div class="card-body" v-if="dashboard.soCalo.history && dashboard.soCalo.history.length > 0">
             <h5 v-for="(item, index) in dashboard.soCalo.history">
               Bạn đã hấp thụ <span class="badge badge-success">{{ fixedNumber(item.calo) }} calo</span> từ 
               <span class="badge badge-secondary">{{ item.name }}</span>
             </h5>
+          </div>
+          <div class="card-body" v-else>
+              Chưa có dữ liệu ăn uống ngày hôm nay
           </div>
         </div>
       </div>
@@ -41,10 +44,13 @@
       </div>
       <div class="col-md-6" v-if="loaded">
         <div class="card scroll">
-          <div class="card-body">
+          <div class="card-body" v-if="dashboard.weightInDay && dashboard.weightInDay.length > 0">
             <h5 v-for="(item, index) in dashboard.weightInDay">
-              Bạn vừa cân được <span class="badge badge-success">{{ fixedNumber(item) }} Kg</span>
+              Bạn vừa cân được <span class="badge badge-success">{{ fixedNumber(item, 2) }} Kg</span>
             </h5>
+          </div>
+          <div class="card-body" v-else>
+              Chưa có dữ liệu ăn uống ngày hôm nay
           </div>
         </div>
       </div>
@@ -83,9 +89,9 @@ export default {
     this.loaded = true
   },
   methods: {
-    fixedNumber(num) {
+    fixedNumber(num, point = 0) {
       if (num) {
-        return num.toFixed(0);
+        return num.toFixed(point);
       }
 
       return num;

@@ -1,5 +1,5 @@
 <template>
-  <el-menu class="el-menu-demo" mode="horizontal">
+  <el-menu class="el-menu-demo" v-if="user" mode="horizontal">
     <el-submenu index="2">
       <template slot="title">Menu</template>
       <el-menu-item index="2-1">
@@ -25,6 +25,11 @@
       <el-menu-item index="2-5">
         <router-link :to="{ name: 'addWeight' }" class="link">
           Thêm lịch sử cân nặng
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="2-6">
+        <router-link :to="{ name: 'spendIndex' }" class="link">
+          Quản lý chi tiêu
         </router-link>
       </el-menu-item>
     </el-submenu>
