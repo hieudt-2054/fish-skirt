@@ -134,12 +134,13 @@
           placeholder="Tìm kiếm tên SP"/>
       </template>
       <template slot-scope="scope">
+        <router-link :to="{ name: 'editFood', params: { id: scope.row.id }}">
         <el-button
           size="mini"
-          disabled
         >
           Sửa
         </el-button>
+        </router-link>
         <el-button
           size="mini"
           type="danger"

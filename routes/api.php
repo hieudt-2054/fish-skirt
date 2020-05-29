@@ -30,7 +30,7 @@ Route::resource('spendcategory', 'SpendCategoryController');
 Route::resource('spend', 'SpendDetailController');
 
 
-Route::get('dashboard', 'DashboardController@getData');
+Route::get('dashboard/', 'DashboardController@getData');
 Route::get('dashboardspend', 'DashboardController@getDataSpend');
 Route::get('xoatp/{id}', 'ThucPhamController@deletetp');
 

@@ -50,9 +50,9 @@ class ThucPhamController extends Controller
      * @param  \App\ThucPham  $thucPham
      * @return \Illuminate\Http\Response
      */
-    public function show(ThucPham $thucPham)
+    public function show($thucPham)
     {
-        //
+        return response()->json(['data' => ThucPham::find($thucPham)]);
     }
 
     /**
@@ -75,7 +75,13 @@ class ThucPhamController extends Controller
      */
     public function update(Request $request, ThucPham $thucPham)
     {
-        //
+        try {
+            $tp = ThucPham::find($request->id);
+            return response()->json(['status' => $tp->update($request->except(['created_at', 'updated_at']))]);
+        } catch (\Exception $ex) {
+            return response()->json(['status' => 'error'], 500);
+        }
+        
     }
 
     public function deletetp($thucPham)

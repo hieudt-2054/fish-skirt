@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function getData()
+    public function getData(Request $req)
     {
         $user = Auth::user();
-        $now = date('Y-m-d');
+        $now = $req->date ?? date('Y-m-d');
         $calo = $this->getCaloByDate($now);
         $weightNow = $this->getWeightByDate($now);
         $calo7Day = [];

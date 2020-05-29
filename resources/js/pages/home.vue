@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <div class="row" v-if="loaded">
+  <div v-loading="!loaded">
+    <el-card class="box-card" >
+      <div class="row"  v-loading="loadedEat" v-if="dashboard.soCalo">
         <div class="col-md-3">
           <h5>Số calo hấp thụ trong ngày <span class="badge badge-success">{{ fixedNumber(dashboard.soCalo.calo) || 0 }}</span></h5>
         </div>
@@ -16,14 +16,23 @@
         </div>
       </div>
     </el-card>
-    <div class="row mt-3">
+    <div class="row mt-3" v-if="dashboard.calo7Day">
       <div class="col-md-6">
         <el-card class="box-card">
-          <area-chart v-if="loaded" :type=1 :label="'Lượng calo hấp thụ trong 7 ngày gần đây'" :dataSet="dashboard.calo7Day"/>
+          <area-chart :type=1 :label="'Lượng calo hấp thụ trong 7 ngày gần đây'" :dataSet="dashboard.calo7Day"/>
         </el-card>
       </div>
-      <div class="col-md-6" v-if="loaded">
-        <div class="card scroll">
+      <div class="col-md-6">
+        <div class="card scroll"  v-loading="loadedEat" v-if="dashboard.soCalo">
+          <el-date-picker
+            v-model="date"
+            type="date"
+            placeholder="Chọn ngày"
+            format="dd/MM/yyyy"
+      			value-format="yyyy-MM-dd"
+            @change="refetchEat"
+          >
+          </el-date-picker>
           <div class="card-body" v-if="dashboard.soCalo.history && dashboard.soCalo.history.length > 0">
             <h5 v-for="(item, index) in dashboard.soCalo.history">
               Bạn đã hấp thụ <span class="badge badge-success">{{ fixedNumber(item.calo) }} calo</span> từ 
@@ -36,21 +45,21 @@
         </div>
       </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3" v-if="dashboard.weight7Day">
       <div class="col-md-6">
         <el-card class="box-card">
-          <area-chart v-if="loaded" :label="'Chỉ số cân thấp nhất trong 7 ngày gần đây'" :dataSet="dashboard.weight7Day"/>
+          <area-chart :label="'Chỉ số cân thấp nhất trong 7 ngày gần đây'" :dataSet="dashboard.weight7Day"/>
         </el-card>
       </div>
-      <div class="col-md-6" v-if="loaded">
-        <div class="card scroll">
+      <div class="col-md-6" >
+        <div class="card scroll" v-loading="loadedEat">
           <div class="card-body" v-if="dashboard.weightInDay && dashboard.weightInDay.length > 0">
             <h5 v-for="(item, index) in dashboard.weightInDay">
               Bạn vừa cân được <span class="badge badge-success">{{ fixedNumber(item, 2) }} Kg</span>
             </h5>
           </div>
           <div class="card-body" v-else>
-              Chưa có dữ liệu ăn uống ngày hôm nay
+              Chưa có dữ liệu cân nặng ngày hôm nay
           </div>
         </div>
       </div>
@@ -67,8 +76,10 @@ export default {
   data () {
     return {
       loaded: false,
+      loadedEat: false,
       dashboard: [],
       datacollection: null,
+      date: null,
     }
   },
   components: {
@@ -114,6 +125,20 @@ export default {
     },
     getRandomInt () {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+    },
+    async refetchEat (d) {
+      this.loadedEat = true
+      await axios.get('/api/dashboard', {
+        params: {
+          date: d
+        }
+      })
+        .then((response) => {
+          this.dashboard.soCalo = response.data.data.soCalo
+          this.dashboard.weightInDay = response.data.data.weightInDay
+          this.dashboard.soCaloConLai = response.data.data.soCaloConLai
+        })
+      this.loadedEat = false
     }
   }
 }

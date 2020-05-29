@@ -46,7 +46,7 @@
 							type="date"
 							placeholder="Chọn ngày"
 							format="dd/MM/yyyy"
-      				value-format="dd/MM/yyyy"
+      						value-format="dd/MM/yyyy"
 							>
 						</el-date-picker>
 						<el-button v-if="index != 0" type="danger" @click="removeForm(index)"><fa icon="trash" /></el-button>
