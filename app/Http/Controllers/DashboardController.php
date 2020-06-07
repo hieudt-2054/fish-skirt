@@ -80,7 +80,26 @@ class DashboardController extends Controller
         if ($showDay) {
             return $history;
         }
-        return ['date' => $ngay, 'socan' => $min == 100 ? $user->cannang_from : $min];
+        $temp = $user->cannang_from;
+        if ($min == 100) {
+            $data = [];
+            $i = 1;
+            $count = 0;
+            if ($user->cannang_from !== 0) {
+                while (count($data) == 0  && $count != 7) {
+                    $beforeDay = date_create($ngay);
+                    date_sub($beforeDay, date_interval_create_from_date_string("{$i} day"));
+                    $data = $this->getWeightByDate($beforeDay, true);
+                    $i++;
+                    $count++;
+                }
+                if (count($data)) {
+                    sort($data);
+                    $temp = $data[0];
+                }
+            }
+        }
+        return ['date' => $ngay, 'socan' => $min == 100 ? $temp : $min];
     }
 
     public function getDataSpend()
