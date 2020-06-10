@@ -41,6 +41,9 @@
               <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
+              <router-link :to="{ name: 'register' }" class="ml-2 btn btn-success">
+                Đăng ký
+              </router-link>
 
               <!-- GitHub Login Button -->
               <login-with-github />

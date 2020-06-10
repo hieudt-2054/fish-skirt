@@ -12,8 +12,11 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
             <div class="col-md-7">
-              <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
+              <input v-model.trim="$v.form.name.$model" :class="{ 'is-invalid': form.errors.has('name') || ($v.form.name.$anyDirty && $v.form.name.$invalid) }" class="form-control" type="text" name="name">
               <has-error :form="form" field="name" />
+              <div class="help-block invalid-feedback" v-if="$v.form.name.$anyDirty && !$v.form.name.alpha">Trường tên không được chứa ký tự đặc biệt</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.name.$anyDirty && !$v.form.name.required">Trường tên bắt buộc điền</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.name.$anyDirty && !$v.form.name.minLength">Trường tên tối thiểu 6 ký tự</div>
             </div>
           </div>
 
@@ -21,8 +24,10 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
             <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+              <input v-model.trim="$v.form.email.$model" :class="{ 'is-invalid': form.errors.has('email') || ($v.form.email.$anyDirty && $v.form.email.$invalid) }" class="form-control" type="email" name="email">
               <has-error :form="form" field="email" />
+              <div class="help-block invalid-feedback" v-if="$v.form.email.$anyDirty && !$v.form.email.required">Trường email bắt buộc điền</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.email.$anyDirty && !$v.form.email.email">Định dạng email không hợp lệ</div>
             </div>
           </div>
 
@@ -30,8 +35,10 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
             <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+              <input v-model.trim="$v.form.password.$model" :class="{ 'is-invalid': form.errors.has('password') || ($v.form.password.$anyDirty && $v.form.password.$invalid) }" class="form-control" type="password" name="password">
               <has-error :form="form" field="password" />
+              <div class="help-block invalid-feedback" v-if="$v.form.password.$anyDirty && !$v.form.password.required">Trường mật khẩu bắt buộc điền</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.password.$anyDirty && !$v.form.password.minLength">Trường mật khẩu tối thiểu 6 ký tự</div>
             </div>
           </div>
 
@@ -39,17 +46,23 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('confirm_password') }}</label>
             <div class="col-md-7">
-              <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="form-control" type="password" name="password_confirmation">
+              <input v-model.trim="$v.form.password_confirmation.$model" :class="{ 'is-invalid': form.errors.has('password_confirmation') || ($v.form.password_confirmation.$anyDirty && $v.form.password_confirmation.$invalid) }" class="form-control" type="password" name="password_confirmation">
               <has-error :form="form" field="password_confirmation" />
+              <div class="help-block invalid-feedback" v-if="$v.form.password_confirmation.$anyDirty && !$v.form.password_confirmation.required">Trường xác nhận mật khẩu bắt buộc điền</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.password_confirmation.$anyDirty && !$v.form.password_confirmation.minLength">Trường xác nhận mật khẩu nhỏ nhất 6 ký tự</div>
+              <div class="help-block invalid-feedback" v-if="$v.form.password_confirmation.$anyDirty && !$v.form.password_confirmation.sameAs">Trường xác nhận mật khẩu không khớp</div>
             </div>
           </div>
 
           <div class="form-group row">
             <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
-              <v-button :loading="form.busy">
+              <v-button :loading="form.busy" :disabled="$v.$invalid">
                 {{ $t('register') }}
               </v-button>
+              <router-link :to="{ name: 'login' }" class="ml-2 btn btn-success">
+                Đăng nhập
+              </router-link>
 
               <!-- GitHub Register Button -->
               <login-with-github />
@@ -64,6 +77,7 @@
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import { alpha, required, email, sameAs, minLength } from 'vuelidate/lib/validators'
 
 export default {
   middleware: 'guest',
@@ -85,6 +99,30 @@ export default {
     }),
     mustVerifyEmail: false
   }),
+  validations() {
+    return {
+      form: {
+        name: {
+          alpha,
+          required,
+          minLength: minLength(6)
+        },
+        email: {
+          required,
+          email
+        },
+        password: {
+          required,
+          minLength: minLength(6)
+        },
+        password_confirmation: {
+          required,
+          sameAsPassword: sameAs('password'),
+          minLength: minLength(6)
+        }
+      }
+    }
+  },
 
   methods: {
     async register () {

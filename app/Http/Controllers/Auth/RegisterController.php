@@ -53,6 +53,14 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+        ], [
+            'name.required' => 'Trường tên không được để trống',
+            'name.max' => 'Trường tên tối đa 255 ký tự',
+            'email.required' => 'Trường email không được để trống',
+            'email.email' => 'Định dạng email không hợp lệ',
+            'email.max' => 'Trường email tối đa 255 ký tự',
+            'email.unique' => 'Email đã tồn tại trên hệ thống',
+            'password' => 'Trường mật khẩu không được để trống'
         ]);
     }
 

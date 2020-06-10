@@ -23,7 +23,7 @@
     </div>
     <br/> <br/> <br/>
     <div class="text-center">
-      <div class="title mt-10">
+      <div class="title mt-10 white-color">
         Fish-Skirt Project Version 0.0.1
       </div>
     </div>
@@ -59,5 +59,8 @@ export default {
 
 .title {
   font-size: 85px;
+}
+.white-color {
+  color: white;
 }
 </style>

@@ -5,7 +5,8 @@ import i18n from '~/plugins/i18n'
 import App from '~/components/App'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
-
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 // import 'element-ui/lib/theme-chalk/index.css'
 

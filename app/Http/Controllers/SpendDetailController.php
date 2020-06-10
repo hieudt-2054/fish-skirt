@@ -36,7 +36,6 @@ class SpendDetailController extends Controller
      */
     public function store(Request $request)
     {
-        \DB::beginTransaction();
         try {
             foreach ($request->all() as $item) {
                 SpendDetail::create([
@@ -48,13 +47,8 @@ class SpendDetailController extends Controller
                     'ngay' => \Carbon\Carbon::createFromFormat('d/m/Y', $item['ngay'])->format('Y-m-d')
                 ]);
             }
-            // return response()->json(['data' => 'success']);
-
-            \DB::commit();
-
             return response()->json(['data' => 'success']);
         } catch (\Exception $e) {
-            \DB::rollBack();
 
             return response($e);
         }
