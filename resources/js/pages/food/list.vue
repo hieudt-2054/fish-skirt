@@ -144,7 +144,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          @click.native.prevent="deleteRow(scope.row.id, scope.row.tensp, scope.$index, tableData)"
         >
           Xóa
         </el-button>
@@ -179,17 +179,28 @@ export default {
       })
   },
   methods: {
-    async deleteRow (index, rows) {
-      var id = rows[index].id
+    async deleteRow (id, tensp, index, rows) {
       this.loading = true
       await axios.get(`/api/xoatp/${id}`)
         .then((response) => {
           this.loading = false
-          rows.splice(index, 1)
+          // rows.splice(index, 1)
           this.$notify.success({
             title: 'Success',
-            message: `Đã xóa ${rows[index].tensp}`
+            message: `Đã xóa ${tensp}`
           })
+          axios.get(`/api/thucpham`)
+            .then((response) => {
+              this.tableData = response.data
+              this.loading = false
+            })
+            .catch(() => {
+              this.$notify.error({
+                title: 'Error',
+                message: 'Có lỗi xảy ra mất rồi'
+              })
+              this.loading = false
+            })
         })
         .catch(() => {
           this.$notify.error({

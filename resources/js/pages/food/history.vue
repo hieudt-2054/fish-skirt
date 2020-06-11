@@ -9,7 +9,7 @@
 			<el-form :xs="24" :sm="24" :md="24" :lg="24" v-for="(form, index) in forms" v-bind:key="form.id">
 				<el-form-item>
 					<el-col>
-						<el-select v-model="form.thucpham_id" filterable placeholder="Chọn Sản Phẩm">
+						<el-select v-model="form.thucpham_id" filterable placeholder="Chọn Sản Phẩm" :class="{ 'form-er': findObjErrors(index, 'thucpham_id') }">
 							<el-option
 							v-for="item in product"
 							:key="item.id"
@@ -17,15 +17,21 @@
 							:value="item.id">
 							</el-option>
 						</el-select>
+            <div class="el-form-item__error" v-if="findObjErrors(index, 'thucpham_id')">
+             {{ findStringErrors(index, 'thucpham_id') }}
+            </div>
 					</el-col>
 					</el-form-item>
 				<el-form-item>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24">
-						<el-input v-model="form.sogram" placeholder="Số Gram hoặc ML">
+						<el-input v-model="form.sogram" placeholder="Số Gram hoặc ML" :class="{ 'form-er': findObjErrors(index, 'sogram') }">
 							<template slot="prepend">
             		g/ML
           		</template>
 						</el-input>
+            <div class="el-form-item__error" v-if="findObjErrors(index, 'sogram')">
+             {{ findStringErrors(index, 'sogram') }}
+            </div>
 					</el-col>
 				</el-form-item>
 				<el-form-item>
@@ -59,6 +65,7 @@ export default {
     return {
       state: '',
       product: [],
+      err: [],
 			forms: [],
 			 pickerOptions: {
           shortcuts: [{
@@ -99,6 +106,7 @@ export default {
           this.$router.push({ name: 'home' })
         })
         .catch((err) => {
+          this.err = err.response.data.errors
           this.$notify.error({
             title: 'Error',
             message: err.response.data.msg || 'Có lỗi xảy ra mất rồi'
@@ -107,6 +115,9 @@ export default {
     },
     formReset () {
       this.forms = []
+    },
+    removeError(index) {
+      this.err.splice(index, 1);
     },
     createForm () {
         this.forms.push({
@@ -117,7 +128,34 @@ export default {
 		},
 		removeForm(index) {
 			this.forms.splice(index, 1);
-		}
+    },
+    convertObjToArr(errors) {
+      var result = [];
+      for (var key in errors) {
+          // skip loop if the property is from prototype
+          if (!errors.hasOwnProperty(key)) continue;
+
+          var index = key.split('.')[0];
+          result[index] = errors[key];
+
+      }
+      console.log(result);
+      return result;
+    },
+    findObjErrors(index, name) {
+      var end = index + '.' + name;
+      if (this.err[end]) {
+        return true
+      }
+      return false;
+    },
+    findStringErrors(index, name) {
+      var end = index + '.' + name;
+      if (this.err[end]) {
+        return this.err[end][0]
+      }
+      return '';
+    }
   }
 }
 </script>

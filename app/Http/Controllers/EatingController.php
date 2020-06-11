@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Eating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EatingRequest;
 
 class EatingController extends Controller
 {
@@ -34,7 +35,7 @@ class EatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EatingRequest $request)
     {
         try {
             foreach ($request->all() as $item) {
