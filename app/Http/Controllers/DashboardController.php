@@ -20,8 +20,10 @@ class DashboardController extends Controller
         $weightNow = $this->getWeightByDate($now);
         $calo7Day = [];
         $weight7Day = [];
-        for ($i=6; $i > 0; $i--) { 
-            $time = date('Y-m-d', strtotime("-{$i} day"));
+        for ($i=6; $i > 0; $i--) {
+            $beforeDay = date_create($now);
+            date_sub($beforeDay, date_interval_create_from_date_string("{$i} day"));
+            $time = $beforeDay->format('Y-m-d');
             $calo7Day[] = $this->getCaloByDate($time)['calo'];
             $weight7Day[] = $this->getWeightByDate($time)['socan'];
         }

@@ -4,7 +4,7 @@ import moment from "moment";
 
 export default {
   extends: Line,
-  props: ['label', 'dataSet', 'type'],
+  props: ['label', 'dataSet', 'type', 'date'],
   
   data() {
     return {
@@ -32,15 +32,7 @@ export default {
 
     this.renderChart(
       {
-        labels: [
-          moment().subtract(6, 'days').format('DD-MM-YYYY'),
-          moment().subtract(5, 'days').format('DD-MM-YYYY'),
-          moment().subtract(4, 'days').format('DD-MM-YYYY'),
-          moment().subtract(3, 'days').format('DD-MM-YYYY'),
-          moment().subtract(2, 'days').format('DD-MM-YYYY'),
-          moment().subtract(1, 'days').format('DD-MM-YYYY'),
-          moment().subtract(0, 'days').format('DD-MM-YYYY'),
-        ],
+        labels: this.date,
         datasets: [
           {
             label: this.label,

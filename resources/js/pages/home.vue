@@ -17,9 +17,9 @@
       </div>
     </el-card>
     <div class="row mt-3" v-if="dashboard.calo7Day">
-      <div class="col-md-6">
+      <div class="col-md-6" v-loading="loadedChart2">
         <el-card class="box-card">
-          <area-chart :type=1 :label="'Lượng calo hấp thụ trong 7 ngày gần đây'" :dataSet="dashboard.calo7Day"/>
+          <area-chart v-if="!rerender" :date="labelsDate" :type=1 :label="'Lượng calo hấp thụ trong 7 ngày gần đây'" :dataSet="dashboard.calo7Day"/>
         </el-card>
       </div>
       <div class="col-md-6">
@@ -46,9 +46,9 @@
       </div>
     </div>
     <div class="row mt-3" v-if="dashboard.weight7Day">
-      <div class="col-md-6">
-        <el-card class="box-card">
-          <area-chart :label="'Chỉ số cân thấp nhất trong 7 ngày gần đây'" :dataSet="dashboard.weight7Day"/>
+      <div class="col-md-6" v-loading="loadedChart1">
+        <el-card class="box-card" v-if="labelsDate.length > 0">
+          <area-chart v-if="!rerender" :date="labelsDate" :label="'Chỉ số cân thấp nhất trong 7 ngày gần đây'" :dataSet="dashboard.weight7Day"/>
         </el-card>
       </div>
       <div class="col-md-6" >
@@ -70,6 +70,7 @@
 <script>
 import AreaChart from '../components/AreaChart.vue'
 import axios from 'axios'
+import moment from "moment";
 
 export default {
   middleware: 'auth',
@@ -77,9 +78,21 @@ export default {
     return {
       loaded: false,
       loadedEat: false,
+      loadedChart1: false,
+      loadedChart2: false,
       dashboard: [],
+      rerender: false,
       datacollection: null,
       date: null,
+      labelsDate: [
+        moment().subtract(6, 'days').format('DD-MM-YYYY'),
+        moment().subtract(5, 'days').format('DD-MM-YYYY'),
+        moment().subtract(4, 'days').format('DD-MM-YYYY'),
+        moment().subtract(3, 'days').format('DD-MM-YYYY'),
+        moment().subtract(2, 'days').format('DD-MM-YYYY'),
+        moment().subtract(1, 'days').format('DD-MM-YYYY'),
+        moment().subtract(0, 'days').format('DD-MM-YYYY'),
+      ],
     }
   },
   components: {
@@ -127,7 +140,19 @@ export default {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5
     },
     async refetchEat (d) {
+      this.rerender = true;
+      this.labelsDate = [
+          moment(d).subtract(6, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(5, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(4, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(3, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(2, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(1, 'days').format('DD-MM-YYYY'),
+          moment(d).subtract(0, 'days').format('DD-MM-YYYY'),
+      ];
       this.loadedEat = true
+      // this.loadedChart2 = true
+      // this.loadedChart1 = true
       await axios.get('/api/dashboard', {
         params: {
           date: d
@@ -137,8 +162,13 @@ export default {
           this.dashboard.soCalo = response.data.data.soCalo
           this.dashboard.weightInDay = response.data.data.weightInDay
           this.dashboard.soCaloConLai = response.data.data.soCaloConLai
+          this.dashboard.weight7Day = response.data.data.weight7Day
+          this.dashboard.calo7Day = response.data.data.calo7Day
         })
       this.loadedEat = false
+      // this.loadedChart1 = false
+      // this.loadedChart2 = false
+      this.rerender = false;
     }
   }
 }
