@@ -1,11 +1,11 @@
 <template>
-  <card :title="$t('your_password')">
+  <card title="Quản lý mật khẩu">
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('password_updated')" />
 
       <!-- Password -->
       <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('new_password') }}</label>
+        <label class="col-md-3 col-form-label text-md-right">Mật khẩu mới</label>
         <div class="col-md-7">
           <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
           <has-error :form="form" field="password" />
@@ -25,7 +25,7 @@
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
           <v-button :loading="form.busy" type="success">
-            {{ $t('update') }}
+            Cập Nhật
           </v-button>
         </div>
       </div>

@@ -96,6 +96,7 @@ export default {
             type: 'success'
           })
           this.formReset()
+          this.$router.push({ name: 'home' })
         })
         .catch((err) => {
           this.$notify.error({

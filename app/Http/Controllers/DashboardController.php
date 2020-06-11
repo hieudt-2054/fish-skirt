@@ -6,7 +6,9 @@ use Auth;
 use App\ThucPham;
 use App\SpendDetail;
 use App\Eating;
+use App\Mail\MailNotify;
 use Illuminate\Http\Request;
+use Mail;
 
 class DashboardController extends Controller
 {
@@ -130,4 +132,10 @@ class DashboardController extends Controller
         return $total;
     }
 
+    public function sendEmail()
+    {
+      $user = auth()->user();
+    //   dd($user->name);
+      Mail::to($user)->send(new MailNotify($user));
+    }
 }

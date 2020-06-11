@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', 'Auth\UserController@current');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
+    Route::get('email', 'DashboardController@sendEMail');
     Route::patch('settings/password', 'Settings\PasswordController@update');
 });
 Route::resource('thucpham', 'ThucPhamController');

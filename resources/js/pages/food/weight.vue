@@ -9,11 +9,14 @@
 			<el-form :xs="24" :sm="24" :md="24" :lg="24" v-for="(form, index) in forms" v-bind:key="form.id">
 				<el-form-item>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24">
-						<el-input v-model="form.socan" placeholder="Số Cân">
+						<el-input v-model="form.socan" @change="removeError(index)" placeholder="Số Cân" :class="{ 'form-er': err[index] }">
 							<template slot="prepend">
-                                KG
-                            </template>
+                  KG
+              </template>
 						</el-input>
+            <div class="el-form-item__error" v-if="err[index]">
+             {{ err[index][0] }}
+            </div>
 					</el-col>
 				</el-form-item>
 				<el-form-item>
@@ -41,13 +44,15 @@
 <script>
 import axios from 'axios'
 import moment from "moment";
+import { alpha, required, email, decimal, minLength } from 'vuelidate/lib/validators'
 
 export default {
   data () {
     return {
       state: '',
       product: [],
-	  forms: [],
+    forms: [],
+    err: [],
     }
   },
   async mounted () {
@@ -63,8 +68,10 @@ export default {
             type: 'success'
           })
           this.formReset()
+          this.$router.push({ name: 'home' })
         })
         .catch((err) => {
+          this.err = this.convertObjToArr(err.response.data.errors)
           this.$notify.error({
             title: 'Error',
             message: err.response.data.msg || 'Có lỗi xảy ra mất rồi'
@@ -73,6 +80,7 @@ export default {
     },
     formReset () {
       this.forms = []
+      this.err = []
     },
     createForm () {
         this.forms.push({
@@ -82,7 +90,32 @@ export default {
 		},
 		removeForm(index) {
 			this.forms.splice(index, 1);
+    },
+    removeError(index) {
+      this.err.splice(index, 1);
+    },
+    convertObjToArr(errors) {
+      var result = [];
+      for (var key in errors) {
+          // skip loop if the property is from prototype
+          if (!errors.hasOwnProperty(key)) continue;
+
+          var index = key.split('.')[0];
+          result[index] = errors[key];
+
+      }
+      return result;
+    }
+  },
+  	validations() {
+		return {
+			forms : {
+				socan: {
+					required,
+					decimal
+				}
+			}
 		}
-  }
+	}
 }
 </script>

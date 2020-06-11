@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\CanNang;
 use Illuminate\Http\Request;
+use App\Http\Requests\CannangRequest;
 
 class CanNangController extends Controller
 {
@@ -34,7 +35,7 @@ class CanNangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CannangRequest $request)
     {
         try {
             foreach ($request->all() as $item) {

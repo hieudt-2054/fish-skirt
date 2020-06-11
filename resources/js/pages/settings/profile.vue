@@ -57,12 +57,14 @@
         </div>
       </div>
     </form>
+    <!-- <button class="btn btn-success" @click="sendMail">Send Mail</button> -->
   </card>
 </template>
 
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
   scrollToTop: false,
@@ -97,6 +99,9 @@ export default {
       const { data } = await this.form.patch('/api/settings/profile')
 
       this.$store.dispatch('auth/updateUser', { user: data })
+    },
+    sendMail () {
+      axios.get('/api/email')
     }
   }
 }
