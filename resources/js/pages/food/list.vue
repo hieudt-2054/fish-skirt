@@ -189,6 +189,7 @@ export default {
             title: 'Success',
             message: `Đã xóa ${tensp}`
           })
+          this.search = ''
           axios.get(`/api/thucpham`)
             .then((response) => {
               this.tableData = response.data

@@ -117,9 +117,12 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
-          Cập nhật
+         <fa icon="check"/> Cập nhật
         </el-button>
-        <el-button @click="formReset">Xoá Form</el-button>
+        <el-button @click="formReset"><fa icon="trash"/> Xoá Form</el-button>
+        <el-button type="info" @click="back">
+          <fa icon="arrow-left"/> Quay lại
+        </el-button>
       </el-form-item>
     </el-form>
   </el-card>
@@ -207,6 +210,9 @@ export default {
       let setNull = obj => setAll(obj, null)
       setNull(this.form)
       this.urlImport = null
+    },
+    back() {
+      this.$router.push({ name: 'listFood' })
     }
   }
 }

@@ -3,16 +3,16 @@
     <el-card class="box-card" >
       <div class="row"  v-loading="loadedEat" v-if="dashboard.soCalo">
         <div class="col-md-3">
-          <h5>Số calo hấp thụ trong ngày <span class="badge badge-success">{{ fixedNumber(dashboard.soCalo.calo) || 0 }}</span></h5>
+          <h5>Số calo hấp thụ trong ngày<br/> <span class="badge badge-success">{{ fixedNumber(dashboard.soCalo.calo) || 0 }}</span></h5>
         </div>
         <div class="col-md-3">
-          <h5>Số calo còn lại trong ngày <span class="badge badge-warning">{{ fixedNumber(dashboard.soCaloConLai) || 0 }}</span></h5>
+          <h5>Số calo còn lại trong ngày<br/> <span class="badge badge-warning">{{ fixedNumber(dashboard.soCaloConLai) || 0 }}</span></h5>
         </div>
         <div class="col-md-3">
-          <h5>Số sản phẩm trong hệ thống <span class="badge badge-secondary">{{ dashboard.soSanpham || 0 }}</span></h5>
+          <h5>Số sản phẩm trong hệ thống<br/> <span class="badge badge-secondary">{{ dashboard.soSanpham || 0 }}</span></h5>
         </div>
         <div class="col-md-3">
-          <h5>Lần cân nhỏ nhất 7 ngày qua <span class="badge badge-danger">{{ Math.min.apply(null, dashboard.weight7Day) }} KG</span></h5>
+          <h5>Lần cân nhỏ nhất 7 ngày qua<br/> <span class="badge badge-danger">{{ Math.min.apply(null, dashboard.weight7Day) }} KG</span></h5>
         </div>
       </div>
     </el-card>

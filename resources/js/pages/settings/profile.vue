@@ -25,7 +25,7 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">Cân nặng gốc</label>
         <div class="col-md-7">
-          <input v-model="form.cannang_from" :class="{ 'is-invalid': form.errors.has('cannang_from') }" class="form-control" type="number" name="cannang_from">
+          <input v-model="form.cannang_from" :class="{ 'is-invalid': form.errors.has('cannang_from') }" class="form-control" type="number" step="0.01" name="cannang_from">
           <has-error :form="form" field="cannang_from" />
         </div>
       </div>
@@ -34,7 +34,7 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">Cân nặng mong muốn</label>
         <div class="col-md-7">
-          <input v-model="form.cannang_to" :class="{ 'is-invalid': form.errors.has('cannang_to') }" class="form-control" type="number" name="cannang_to">
+          <input v-model="form.cannang_to" :class="{ 'is-invalid': form.errors.has('cannang_to') }" class="form-control" type="number" step="0.01" name="cannang_to">
           <has-error :form="form" field="cannang_to" />
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">Số calo cần thiết 1 ngày</label>
         <div class="col-md-7">
-          <input v-model="form.caloonday" :class="{ 'is-invalid': form.errors.has('caloonday') }" class="form-control" type="number" name="caloonday">
+          <input v-model="form.caloonday" :class="{ 'is-invalid': form.errors.has('caloonday') }" class="form-control" type="number" step="0.01" name="caloonday">
           <has-error :form="form" field="caloonday" />
         </div>
       </div>
