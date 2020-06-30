@@ -71,6 +71,8 @@
 import AreaChart from '../components/AreaChart.vue'
 import axios from 'axios'
 import moment from "moment";
+import { mapGetters } from 'vuex'
+
 
 export default {
   middleware: 'auth',
@@ -98,10 +100,16 @@ export default {
   components: {
     AreaChart
   },
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
   metaInfo () {
     return { title: this.$t('home') }
   },
   mounted () {
+    if (this.user.tdee_guide === 0) {
+      this.$router.push('/tdee')
+    }
     this.fillData()
   },
   async created () {
@@ -110,6 +118,7 @@ export default {
       .then((response) => {
         this.dashboard = response.data.data
       })
+    await this.$store.dispatch('auth/fetchUser')
     this.loaded = true
   },
   methods: {

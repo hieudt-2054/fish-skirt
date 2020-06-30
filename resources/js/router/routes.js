@@ -19,6 +19,7 @@ export default [
   { path: '/add-weight', name: 'addWeight', component: page('food/weight.vue') },
   { path: '/list-food', name: 'listFood', component: page('food/list.vue') },
   { path: '/home', name: 'home', component: page('home.vue') },
+  { path: '/tdee', name: 'tdee', component: page('tdee.vue') },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [
