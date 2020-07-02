@@ -9,11 +9,11 @@
           </form>
         </div>
 
-        <div class="col-4 site-logo">
+        <div class="col-6 site-logo">
           <a href="/" class="text-black h2 mb-0">Sức Khỏe Blog</a>
         </div>
 
-        <div class="col-8 text-right">
+        <div class="col-6 text-right">
           <nav class="site-navigation" role="navigation">
             <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
               <li><a href="/">Trang chủ</a></li>

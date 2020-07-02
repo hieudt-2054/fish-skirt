@@ -635,7 +635,7 @@ h1, h2, h3, h4, h5,
     line-height: 1.5; }
 
 .retro-layout .two-col > a {
-  width: calc(50% - 15px);
+  width: calc(25% - 15px);
   float: left; }
   @media (max-width: 767.98px) {
     .retro-layout .two-col > a {

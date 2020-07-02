@@ -49,7 +49,7 @@
               <ul>
                 @foreach($newPosts as $post)
                 <li>
-                  <a href="/c/{{$post->id}}">
+                  <a href="/p/{{$post->id}}">
                     <img src="{{$post->post_image_path}}" alt="Image placeholder" class="mr-4">
                     <div class="text">
                       <h4>{{$post->title}}</h4>
@@ -63,32 +63,11 @@
           <!-- END sidebar-box -->
 
           <div class="sidebar-box">
-            <h3 class="heading">Categories</h3>
+            <h3 class="heading">Danh mục</h3>
             <ul class="categories">
-              <li><a href="#">Food <span>(12)</span></a></li>
-              <li><a href="#">Travel <span>(22)</span></a></li>
-              <li><a href="#">Lifestyle <span>(37)</span></a></li>
-              <li><a href="#">Business <span>(42)</span></a></li>
-              <li><a href="#">Adventure <span>(14)</span></a></li>
-            </ul>
-          </div>
-          <!-- END sidebar-box -->
-
-          <div class="sidebar-box">
-            <h3 class="heading">Tags</h3>
-            <ul class="tags">
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
+              @foreach($categories as $category)
+              <li><a href="/c/{{$category->id}}">{{ $category->name }} <span>({{ $category->posts->count() }})</span></a></li>
+              @endforeach
             </ul>
           </div>
         </div>
@@ -103,47 +82,23 @@
 
       <div class="row mb-5">
         <div class="col-12">
-          <h2>More Related Posts</h2>
+          <h2>Các bài khác cùng danh mục</h2>
         </div>
       </div>
 
       <div class="row align-items-stretch retro-layout">
-        
-        <div class="col-md-5 order-md-2">
-          <a href="single.html" class="hentry img-1 h-100 gradient" style="background-image: url('images/img_4.jpg');">
-            <span class="post-category text-white bg-danger">Travel</span>
-            <div class="text">
-              <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-              <span>February 12, 2019</span>
-            </div>
-          </a>
-        </div>
 
-        <div class="col-md-7">
-          
-          <a href="single.html" class="hentry img-2 v-height mb30 gradient" style="background-image: url('images/img_1.jpg');">
-            <span class="post-category text-white bg-success">Nature</span>
-            <div class="text text-sm">
-              <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-              <span>February 12, 2019</span>
-            </div>
-          </a>
-          
+        <div class="col-md-12">
           <div class="two-col d-block d-md-flex">
-            <a href="single.html" class="hentry v-height img-2 gradient" style="background-image: url('images/img_2.jpg');">
-              <span class="post-category text-white bg-primary">Sports</span>
-              <div class="text text-sm">
-                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                <span>February 12, 2019</span>
-              </div>
-            </a>
-            <a href="single.html" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('images/img_3.jpg');">
-              <span class="post-category text-white bg-warning">Lifestyle</span>
-              <div class="text text-sm">
-                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                <span>February 12, 2019</span>
-              </div>
-            </a>
+              @foreach($related as $post)
+              <a href="/p/{{ $post->id }}" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('{{$post->post_image_path}}');">
+                <span class="post-category text-white bg-primary">{{$post->category->name }}</span>
+                <div class="text text-sm">
+                  <h2>{{$post->title}}</h2>
+                  <span>February 12, 2019</span>
+                </div>
+              </a>
+              @endforeach
           </div>  
           
         </div>
@@ -158,11 +113,10 @@
       <div class="row justify-content-center text-center">
         <div class="col-md-5">
           <div class="subscribe-1 ">
-            <h2>Subscribe to our newsletter</h2>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nesciunt error illum a explicabo, ipsam nostrum.</p>
+            <h2>Đăng ký để nhận tin tức mới nhất</h2>
             <form action="#" class="d-flex">
               <input type="text" class="form-control" placeholder="Enter your email address">
-              <input type="submit" class="btn btn-primary" value="Subscribe">
+              <input type="submit" class="btn btn-primary" value="Đăng ký">
             </form>
           </div>
         </div>

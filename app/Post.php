@@ -11,7 +11,9 @@ class Post extends Model
         'body',
         'post_type',
         'post_image_path',
-        'category_id'
+        'category_id',
+        'created_at',
+        'updated_at',
     ];
 
     public function category()
