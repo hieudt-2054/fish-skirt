@@ -14,4 +14,5 @@ use GuzzleHttp\Client;
 |
 */
 
-
+Route::get('/', 'HomeController@index');
+Route::get('/p/{post}', 'HomeController@show');
