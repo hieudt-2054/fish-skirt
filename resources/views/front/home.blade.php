@@ -33,9 +33,6 @@
                         <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                         <span class="d-inline-block mt-1">Đăng bởi <a href="#">Admin</a></span>
                     </div>
-                    
-                        <p>{{$post->body}}</p>
-                        <p><a href="/p/{{$post->id}}">Đọc thêm</a></p>
                     </div>
                     </div>
                 </div>
@@ -78,9 +75,6 @@
                         <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                         <span class="d-inline-block mt-1">Đăng bởi <a href="#">Admin</a></span>
                     </div>
-                    
-                        <p>{{$post->body}}</p>
-                        <p><a href="/p/{{$post->id}}">Đọc thêm</a></p>
                     </div>
                     </div>
                 </div>

@@ -29,6 +29,9 @@ Route::resource('eating', 'EatingController');
 Route::resource('cannang', 'CanNangController');
 Route::resource('spendcategory', 'SpendCategoryController');
 Route::resource('spend', 'SpendDetailController');
+Route::resource('post', 'PostController');
+Route::resource('categories', 'CategoryController');
+
 
 
 Route::get('dashboard/', 'DashboardController@getData');

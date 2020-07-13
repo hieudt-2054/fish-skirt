@@ -32,6 +32,11 @@
           Quản lý chi tiêu
         </router-link>
       </el-menu-item>
+      <el-menu-item index="2-7">
+        <router-link :to="{ name: 'listPost' }" class="link">
+          Quản lý bài viết
+        </router-link>
+      </el-menu-item>
     </el-submenu>
     <el-submenu index="3" v-if="user">
       <template slot="title"><img :src="user.photo_url" class="rounded-circle profile-photo mr-1 image"> {{ user.name }}</template>

@@ -22,7 +22,7 @@
         <div class="col-md-12 col-lg-8 main-content">
           
           <div class="post-content-body">
-           {{ $post->body }}
+           {!! $post->body !!}
           </div>
 
           

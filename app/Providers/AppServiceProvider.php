@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
-use App\Category;
+// use App\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningUnitTests()) {
             Schema::defaultStringLength(191);
         }
-        View::share('categories', Category::all());
+        // View::share('categories', Category::all());
     }
 
     /**
