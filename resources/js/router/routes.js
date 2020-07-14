@@ -19,6 +19,7 @@ export default [
   { path: '/add-weight', name: 'addWeight', component: page('food/weight.vue') },
   { path: '/list-food', name: 'listFood', component: page('food/list.vue') },
   { path: '/list-post', name: 'listPost', component: page('post/list.vue') },
+  { path: '/edit-post/:id', name: 'editPost', component: page('post/edit.vue') },
   { path: '/add-post', name: 'addPost', component: page('post/add.vue') },
   { path: '/home', name: 'home', component: page('home.vue') },
   { path: '/tdee', name: 'tdee', component: page('tdee.vue') },

@@ -37,7 +37,7 @@
         </br>
         <el-form-item>
             <el-button type="primary" @click="onSubmit">
-                Thêm
+                Cập nhật
             </el-button>
         </el-form-item>
     </el-form>
@@ -79,14 +79,35 @@ export default {
         })
         this.loading = false
       })
+      this.getPost()
   },
   methods: {
+    async getPost () {
+    await axios.get(`/api/post/${this.$route.params.id}`)
+    .then((res) => {
+        this.form.post_type = `${res.data.data.post_type}`
+        this.form.category_id = res.data.data.category_id
+        this.form.title = res.data.data.title
+        this.form.post_image_path = res.data.data.post_image_path
+        if (res.data.data.post_type == 1) {
+            this.form.youtubeScript = res.data.data.body
+        } else {
+            this.form.editorData = res.data.data.body
+        }
+    })
+    .catch((err) => {
+        this.$notify.error({
+        title: 'Error',
+        message: err.response.data.msg || 'Có lỗi xảy ra mất rồi'
+        })
+    })
+    },
     onSubmit () {
-      axios.post('/api/post/', this.form)
+      axios.put(`/api/post/${this.$route.params.id}`, this.form)
         .then(() => {
           this.$notify({
             title: 'Success',
-            message: 'Thêm mới bài viết thành công',
+            message: 'Cập nhật bài viết thành công',
             type: 'success'
           })
           this.formReset()

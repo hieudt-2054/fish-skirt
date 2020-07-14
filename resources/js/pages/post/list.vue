@@ -49,7 +49,7 @@
                     placeholder="Tìm kiếm tên bài viết"/>
                 </template>
                 <template slot-scope="scope">
-                    <router-link :to="{ name: 'editFood', params: { id: scope.row.id }}">
+                    <router-link :to="{ name: 'editPost', params: { id: scope.row.id }}">
                     <el-button
                     size="mini"
                     >

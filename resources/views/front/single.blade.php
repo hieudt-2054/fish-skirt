@@ -1,6 +1,7 @@
 @extends('front.app')
 
 @section('content')
+
 <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('{{$post->post_image_path}}');">
     <div class="container">
       <div class="row same-height justify-content-center">
