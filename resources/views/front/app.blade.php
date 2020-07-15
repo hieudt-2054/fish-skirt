@@ -17,8 +17,10 @@
      <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
      <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
      <link rel="stylesheet" href="/css/aos.css">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
  
      <link rel="stylesheet" href="/css/style.css">
+     <link rel="stylesheet" href="/css/new-age.min.css">
    </head>
    <body>
    

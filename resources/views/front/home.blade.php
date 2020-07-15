@@ -1,17 +1,96 @@
 @extends('front.app')
 
 @section('content')
-
-<div class="site-section bg-light" style="background-image: url(https://www.vinmec.com/static/img/maternity/background.663c1cf25358.gif); background-size: cover;">
+<header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-7 my-auto">
+          <div class="header-content mx-auto">
+            <h1 class="mb-5 color-white">
+                FishSkirt là hệ thống đo lường, theo dõi quá trình giảm cân của những người dùng có nhu cầu.
+                Thời buổi này giảm cân dễ dàng khi đã có hệ thống hỗ trợ , gợi ý, nhằm tối ưu được kết quả mong đợi , giảm cân hiệu quả
+            </h1>
+            <a href="/register" class="btn btn-outline btn-xl js-scroll-trigger">THAM GIA NGAY BÂY GIỜ!</a>
+          </div>
+        </div>
+        <div class="col-lg-5 my-auto">
+          <div class="device-container">
+            <div class="device-mockup iphone6_plus portrait white">
+              <div class="device">
+                <div class="screen">
+                    <img src="https://i.ibb.co/vZYJd7V/image.png" class="img-fluid" alt="">
+                </div>
+                <div class="button">
+                  <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="features bg-primary" id="features">
     <div class="container">
-        <div class="row align-items-stretch retro-layout-2">
-        <div class="col-md-10">
-           <h1>Giải pháp theo dõi sức khỏe - Giảm cân hiệu quả nhanh chóng</h1>
+        <div class="section-heading text-center">
+        <h2>Tối ưu giảm cân bằng công nghệ</h2>
+        <p class="text-muted">Các giá trị dưới là giá trị cốt lõi của hệ thống </p>
+        <hr>
+        </div>
+        <div class="row">
+        <div class="col-lg-4 my-auto">
+            <div class="device-container">
+            <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                <div class="screen">
+                    <img src="https://lh3.googleusercontent.com/mNrWh7xEhqoImo6yxJiPvfwrDbm_T_Ag3FyUInhZyjwNpGE-J_30KMDXCwhh0GfvQkfj" class="img-fluid" alt="">
+                </div>
+                <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-8 my-auto">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="feature-item">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                        <h3>TDEE Calculator</h3>
+                        <p class="text-muted">Chắc bạn cũng biết công thức giảm cân TDEE, hệ thống sẽ tính giúp bạn</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-item">
+                        <i class="fa fa-book text-primary"></i>
+                        <h3>Lưu trữ</h3>
+                        <p class="text-muted">Ghi lại quá trình giảm cân của bạn</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="feature-item">
+                    <i class="fa fa-bar-chart text-primary"></i>
+                    <h3>Đo lường</h3>
+                    <p class="text-muted">Tính toán chỉ số sức khỏe của bạn</p>
+                </div>
+                </div>
+                <div class="col-lg-6">
+                <div class="feature-item">
+                    <i class="fa fa-heartbeat text-primary"></i>
+                    <h3>Rèn luyện</h3>
+                    <p class="text-muted">Website luôn cập nhật tin tức và bài tập tốt cho sức khỏe</p>
+                </div>
+                </div>
+            </div>
+            </div>
         </div>
         </div>
     </div>
-</div>
-
+    </section>
 <div class="site-section">
     <div class="container">
         <div class="row mb-5">
