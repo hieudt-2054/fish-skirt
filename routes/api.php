@@ -23,6 +23,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::get('email', 'DashboardController@sendEMail');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+    Route::get('/prod-req', 'ThucPhamController@prodRequest');
+    Route::get('/thucpham-request', 'ThucPhamController@thucphamRequest');
+    Route::get('/approved/{id}', 'ThucPhamController@approved');
+    Route::get('/getPoints', 'DiemThuongController@getRequestPoints');
 });
 Route::resource('thucpham', 'ThucPhamController');
 Route::resource('eating', 'EatingController');
@@ -31,7 +35,7 @@ Route::resource('spendcategory', 'SpendCategoryController');
 Route::resource('spend', 'SpendDetailController');
 Route::resource('post', 'PostController');
 Route::resource('categories', 'CategoryController');
-
+Route::resource('points', 'DiemThuongController');
 
 
 Route::get('dashboard/', 'DashboardController@getData');

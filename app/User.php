@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cannang_from', 'cannang_to', 'caloonday', 'tdee_guide'
+        'name', 'email', 'password', 'cannang_from', 'cannang_to', 'caloonday', 'tdee_guide', 'roles', 'diemthuong'
     ];
 
     /**
@@ -109,6 +109,11 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function eatings()
     {
         return $this->hasMany(\App\Eating::class, 'user_id', 'id');
+    }
+
+    public function thucphams()
+    {
+        return $this->hasMany(\App\ThucPham::class, 'user_id', 'id');
     }
 
     public function cannangs()

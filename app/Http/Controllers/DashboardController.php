@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
         $data = [
             'id' => $user->id,
-            'soSanpham' => ThucPham::count(),
+            'soSanpham' => ThucPham::active()->count(),
             'soCalo' => $calo,
             'soCaloConLai' => $user->caloonday - $calo['calo'],
             'calo7Day' => $calo7Day,

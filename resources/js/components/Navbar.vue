@@ -27,14 +27,19 @@
           Thêm lịch sử cân nặng
         </router-link>
       </el-menu-item>
-      <el-menu-item index="2-6">
+      <!-- <el-menu-item index="2-6">
         <router-link :to="{ name: 'spendIndex' }" class="link">
           Quản lý chi tiêu
         </router-link>
-      </el-menu-item>
-      <el-menu-item index="2-7">
+      </el-menu-item> -->
+      <el-menu-item index="2-7" v-if="user.roles == 1">
         <router-link :to="{ name: 'listPost' }" class="link">
           Quản lý bài viết
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="2-8" v-if="user.roles == 1">
+        <router-link :to="{ name: 'managePoints' }" class="link">
+          Duyệt YC Đổi thẻ
         </router-link>
       </el-menu-item>
     </el-submenu>
@@ -51,6 +56,16 @@
         </a>
       </el-menu-item>
     </el-submenu>
+    <el-menu-item index="4" v-if="user.roles == 1">
+      <router-link :to="{ name: 'listFoodRequest' }" class="link">
+      Sản phẩm chờ xử lý <span class="badge badge-danger">{{count}}</span>
+      </router-link>
+    </el-menu-item>
+    <el-menu-item index="5">
+      <router-link :to="{ name: 'listPoints' }" class="link">
+      Điểm Thưởng: <span class="badge badge-success">{{user.diemthuong}}</span>
+       </router-link>
+    </el-menu-item>
   </el-menu>
   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
@@ -113,19 +128,23 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
   components: {
   },
 
   data: () => ({
-    appName: window.config.appName
+    appName: window.config.appName,
+    count: 0,
   }),
 
   computed: mapGetters({
     user: 'auth/user'
   }),
-
+  mounted () {
+    this.loadProductRequest()
+  },
   methods: {
     async logout () {
       // Log out the user.
@@ -133,6 +152,12 @@ export default {
 
       // Redirect to login.
       this.$router.push({ name: 'login' })
+    },
+    async loadProductRequest() {
+      await axios.get('/api/prod-req')
+      .then((res) => {
+        this.count = res.data.count
+      });
     }
   }
 }

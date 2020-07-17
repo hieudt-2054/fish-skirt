@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ThucPham;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\User;
+use Auth;
 
 class ThucPhamController extends Controller
 {
@@ -15,7 +17,7 @@ class ThucPhamController extends Controller
      */
     public function index()
     {
-        return ThucPham::all();
+        return ThucPham::active()->get();
     }
 
     /**
@@ -91,10 +93,36 @@ class ThucPhamController extends Controller
         return response()->json(['data' => $data->delete()]);
     }
 
+    public function approved($thucpham)
+    {
+        $data =ThucPham::where('id', $thucpham)->firstOrFail();
+        $updated = $data->update([
+            'status' => 1,
+        ]);
+
+        $u = User::find($data->user_id);
+        $u->diemthuong = $u->diemthuong + 1;
+        $u->save();
+
+        return response()->json(['data' => $updated]);
+    }
+
     public function fetchData(Request $request)
     {
         $client = new Client();
         $result = $client->request('GET', $request->url);
         return response()->json(['data' => $result->getBody()->getContents()]);
+    }
+
+    public function prodRequest()
+    {
+        return response()->json([
+            'count' => count(ThucPham::where('status', 0)->get()),
+        ]);
+    }
+
+    public function thucphamRequest()
+    {
+        return ThucPham::with('user')->where('status', 0)->get();
     }
 }

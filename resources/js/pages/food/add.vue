@@ -106,6 +106,11 @@
         </el-col>
       </el-form-item>
       <el-form-item>
+        <el-col :span="10">
+          <el-input v-model="form.note" type="textarea" placeholder="Ghi chú: để quá trình kiểm duyệt diễn ra nhanh chóng hãy ghi các thông tin dẫn chứng vào đây" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
         <el-button type="primary" @click="onSubmit">
           Tạo
         </el-button>
@@ -118,6 +123,7 @@
 <script>
 import cheerio from 'cheerio'
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -140,10 +146,15 @@ export default {
         caloriefromcarb: null,
         caloriefromfat: null,
         uudiem: null,
-        khuyetdiem: null
+        khuyetdiem: null,
+        note: null,
+        user_id: 0,
       }
     }
   },
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
   watch: {
     async urlImport (newVal) {
       if (newVal === null || newVal === '') {
@@ -201,7 +212,7 @@ export default {
               s[key] = 0;
           }
       })
-
+      this.form.user_id = this.user.id
       axios.post('/api/thucpham/', this.form)
         .then(() => {
           this.$notify({

@@ -26,11 +26,24 @@ class ThucPham extends Model
         'caloriefromcarb',
         'caloriefromfat',
         'uudiem',
-        'khuyetdiem'
+        'khuyetdiem',
+        'user_id',
+        'status',
+        'note'
     ];
 
     public function eatings()
     {
         return $this->hasMany(\App\Eating::class, 'thucpham_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class, 'user_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 }

@@ -10,54 +10,36 @@
       prop="tensp"
       label="Tên sản phẩm"
       fixed
-      width="200"
+      width="300"
       sortable
     />
     <el-table-column
-      prop="nangluong"
-      label="Calories"
+      prop="user.name"
+      label="Người dùng"
       sortable
-      width="120"
+      width="150"
     >
       <template slot-scope="scope">
-        {{ scope.row.nangluong }}
+        {{ scope.row.user.name }}
       </template>
     </el-table-column>
-    <el-table-column
-      prop="chatbeo"
-      sortable
-      width="120"
-      label="Chất béo"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.chatbeo }} g
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="chatxo"
-      sortable
-      width="120"
-      label="Chất xơ"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.chatxo }} g
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="duong"
-      width="100"
-      label="Đường"
-      sortable
-    >
-      <template slot-scope="scope">
-        {{ scope.row.duong }} g
+     <el-table-column type="expand" label="Chỉ số">
+      <template slot-scope="props">
+        <p>Calories: {{ props.row.nangluong }}</p>
+        <p>Chất xơ: {{ props.row.chatxo }}</p>
+        <p>Đường: {{ props.row.duong }}</p>
+        <p>Chất béo: {{ props.row.chatbeo }}</p>
+        <p>Vitamin A: {{ props.row.vitamina }} %</p>
+        <p>Vitamin C: {{ props.row.vitaminc }} %</p>
+        <p>Canxi: {{ props.row.canxi }} %</p>
+        <p>Sắt: {{ props.row.sat }} %</p>
+        <p>Ghi chú: {{ props.row.note }}</p>
       </template>
     </el-table-column>
     <el-table-column
       prop="suckhoe"
       label="Giá trị sức khỏe"
       sortable
-      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="26" :percentage="scope.row.suckhoe" status="success" />
@@ -67,7 +49,6 @@
       prop="giamcan"
       label="Giá trị giảm cân"
       sortable
-      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="24" :percentage="scope.row.giamcan" status="warning"/>
@@ -77,50 +58,9 @@
       prop="tangcan"
       label="Giá trị tăng cân"
       sortable
-      width="160"
     >
       <template slot-scope="scope">
         <el-progress :text-inside="true" :stroke-width="22" :percentage="scope.row.tangcan" status="exception"/>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="vitamina"
-      label="Vitamin A"
-      sortable
-      width="130"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.vitamina }} %
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="vitamic"
-      label="Vitamin C"
-      sortable
-      width="130"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.vitaminc }} %
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="canxi"
-      sortable
-      label="Canxi"
-      width="110"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.canxi }} %
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="sat"
-      sortable
-      label="Sắt"
-      width="110"
-    >
-      <template slot-scope="scope">
-        {{ scope.row.sat }} %
       </template>
     </el-table-column>
     <el-table-column
@@ -134,21 +74,8 @@
           placeholder="Tìm kiếm tên SP"/>
       </template>
       <template slot-scope="scope">
-        <router-link :to="{ name: 'editFood', params: { id: scope.row.id }}" v-if="user.roles == 1">
-        <el-button
-          size="mini"
-        >
-          Sửa
-        </el-button>
-        </router-link>
-        <el-button
-        v-if="user.roles == 1"
-          size="mini"
-          type="danger"
-          @click.native.prevent="deleteRow(scope.row.id, scope.row.tensp, scope.$index, tableData)"
-        >
-          Xóa
-        </el-button>
+        <el-button type="success" @click="approvedProduct(scope.row.id)" icon="el-icon-check" circle></el-button>
+        <el-button type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.row.id, scope.row.tensp, scope.$index, tableData)"></el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -156,7 +83,6 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -166,11 +92,8 @@ export default {
       search: '',
     }
   },
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
   async mounted () {
-    await axios.get(`/api/thucpham`)
+    await axios.get(`/api/thucpham-request`)
       .then((response) => {
         this.tableData = response.data
         this.loading = false
@@ -195,7 +118,39 @@ export default {
             message: `Đã xóa ${tensp}`
           })
           this.search = ''
-          axios.get(`/api/thucpham`)
+          axios.get(`/api/thucpham-request`)
+            .then((response) => {
+              this.tableData = response.data
+              this.loading = false
+            })
+            .catch(() => {
+              this.$notify.error({
+                title: 'Error',
+                message: 'Có lỗi xảy ra mất rồi'
+              })
+              this.loading = false
+            })
+        })
+        .catch(() => {
+          this.$notify.error({
+            title: 'Error',
+            message: 'Có lỗi xảy ra mất rồi'
+          })
+          this.loading = false
+        })
+    },
+
+    async approvedProduct (id) {
+      this.loading = true
+      await axios.get(`/api/approved/${id}`)
+        .then((response) => {
+          this.loading = false
+          this.$notify.success({
+            title: 'Success',
+            message: `Đã approved`
+          })
+          this.search = ''
+          axios.get(`/api/thucpham-request`)
             .then((response) => {
               this.tableData = response.data
               this.loading = false
