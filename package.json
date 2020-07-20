@@ -56,5 +56,8 @@
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.3.2"
+  },
+  "engines": {
+    "node": "10.16.3"
   }
 }
