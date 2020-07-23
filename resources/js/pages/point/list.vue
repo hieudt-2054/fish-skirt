@@ -64,13 +64,12 @@
                 fixed="right"
                 width="200">
                 <template slot-scope="scope">
-                    <router-link :to="{ name: 'editPost', params: { id: scope.row.id }}">
                     <el-button
                     size="mini"
+                    @click="open(scope.row.answer)"
                     >
                     Xem phản hồi
                     </el-button>
-                    </router-link>
                 </template>
                 </el-table-column>
             </el-table>
@@ -166,6 +165,11 @@ export default {
     this.fetchPoints();
   },
   methods: {
+    open(msg) {
+        this.$alert(msg, 'Thông tin yêu cầu', {
+          confirmButtonText: 'OK',
+        });
+      },
     async fetchPoints() {
       await axios.get(`/api/points`)
       .then((response) => {
@@ -184,6 +188,13 @@ export default {
         this.$router.push({ name: 'addPost'});
     },
     async addRequest() {
+      if (!this.typeCard || !this.valueCard) {
+        this.$notify.error({
+              title: 'Error',
+              message: 'Vui lòng chọn đủ dữ liệu'
+            })
+            return
+      }
         if ((this.user.diemthuong * 1000) < this.valueCard) {
           this.$notify.error({
               title: 'Error',
@@ -201,6 +212,8 @@ export default {
                 message: `Đã thêm mới yêu cầu vui lòng đợi phản hồi`
             })
             this.fetchPoints()
+            this.$store.dispatch('auth/fetchUser')
+            this.dialogVisible = false
         })
         .catch(() => {
             this.$notify.error({

@@ -1,9 +1,6 @@
 <template>
     <div>
         <el-row>
-            <el-button type="primary" @click="dialogVisible = true">Tạo yêu cầu đổi thẻ</el-button>
-        </el-row><br/>
-        <el-row>
             <el-table
                 v-loading="loading"
                 :data="tableData.filter(data => !search || data.card.toLowerCase().includes(search.toLowerCase()))"
@@ -11,6 +8,11 @@
                 border
                 style="width: 100%"
             >
+                <el-table-column
+                prop="user_name"
+                label="Người tạo"
+                sortable
+                />
                 <el-table-column
                 prop="card"
                 label="Loại Thẻ"
@@ -65,7 +67,7 @@
                 width="200">
                 <template slot-scope="scope">
                     <el-button type="success" @click="approvedRequest(scope.row.id)" icon="el-icon-check" circle></el-button>
-                    <el-button type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.row.id, scope.row.tensp, scope.$index, tableData)"></el-button>
+                    <el-button type="danger" icon="el-icon-delete" circle @click="cancelRequest(scope.row.id)"></el-button>
                 </template>
                 </el-table-column>
             </el-table>
@@ -77,7 +79,7 @@
         <el-form>
             <el-form-item>
                 <el-alert
-                    title="Vui lòng ghi chi tiết thẻ cào với trường hợp duyệt thẻ và ghi lý do với trường hợp từ chối thẻ"
+                    title="Vui lòng điền thông tin thẻ hoặc lý do từ chối ở bên dưới"
                     type="info"
                     show-icon>
                 </el-alert>
@@ -151,7 +153,7 @@ export default {
   },
   methods: {
     async fetchPoints() {
-      await axios.get(`/api/points`)
+      await axios.get(`/api/getPoints`)
       .then((response) => {
         this.tableData = response.data
         this.loading = false
@@ -170,25 +172,26 @@ export default {
     approvedRequest (row) {
         this.idApproved = row;
         this.dialogVisible = true;
+        this.status = 1
+    },
+    cancelRequest(row) {
+      this.idApproved = row;
+      this.dialogVisible = true;
+      this.status = 2
     },
     async addRequest() {
-        if ((this.user.diemthuong * 1000) < this.valueCard) {
-          this.$notify.error({
-              title: 'Error',
-              message: 'Điểm thưởng của bạn không đủ hoặc bạn vui lòng tải lại trang'
-            })
-          return
-        }
-        await axios.post('/api/getPoints', {
-            card: this.typeCard,
-            value_card: this.valueCard,
+        await axios.post('/api/progressPoints', {
+            answer: this.reason,
+            status: this.status,
+            id: this.idApproved,
         })
         .then((response) => {
             this.$notify.success({
                 title: 'Success',
-                message: `Đã thêm mới yêu cầu vui lòng đợi phản hồi`
+                message: `Đã cập nhật trạng thái thẻ`
             })
             this.fetchPoints()
+            this.dialogVisible = false
         })
         .catch(() => {
             this.$notify.error({

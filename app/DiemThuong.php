@@ -15,4 +15,9 @@ class DiemThuong extends Model
         'status',
         'answer'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class, 'user_id');
+    }
 }

@@ -37,11 +37,6 @@
           Quản lý bài viết
         </router-link>
       </el-menu-item>
-      <el-menu-item index="2-8" v-if="user.roles == 1">
-        <router-link :to="{ name: 'managePoints' }" class="link">
-          Duyệt YC Đổi thẻ
-        </router-link>
-      </el-menu-item>
     </el-submenu>
     <el-submenu index="3" v-if="user">
       <template slot="title"><img :src="user.photo_url" class="rounded-circle profile-photo mr-1 image"> {{ user.name }}</template>
@@ -65,6 +60,11 @@
       <router-link :to="{ name: 'listPoints' }" class="link">
       Điểm Thưởng: <span class="badge badge-success">{{user.diemthuong}}</span>
        </router-link>
+    </el-menu-item>
+    <el-menu-item index="6" v-if="user.roles == 1">
+      <router-link :to="{ name: 'managePoints' }" class="link">
+      Duyệt thẻ <span class="badge badge-danger">{{count}}</span>
+      </router-link>
     </el-menu-item>
   </el-menu>
   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">

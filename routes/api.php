@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/thucpham-request', 'ThucPhamController@thucphamRequest');
     Route::get('/approved/{id}', 'ThucPhamController@approved');
     Route::get('/getPoints', 'DiemThuongController@getRequestPoints');
+    Route::post('/progressPoints', 'DiemThuongController@progressPoints');
 });
 Route::resource('thucpham', 'ThucPhamController');
 Route::resource('eating', 'EatingController');
