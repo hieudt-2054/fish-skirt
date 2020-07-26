@@ -68,20 +68,35 @@ class DiemThuongController extends Controller
     public function progressPoints(Request $req)
     {
         $record = DiemThuong::find($req->id);
-        $record->status = $req->status;
-        $record->answer = $req->answer;
-        $record->save();
-        if ($req->status == 1) {
+        if ($record->status == 2 && $req->status == 1) {
             $u = User::find($record->user->id);
             $value = $record->value_card / 1000;
             $u->diemthuong = $u->diemthuong - $value;
             $u->save();
-        } else {
+        } 
+        if ($record->status == 0 && $req->status == 2) {
             $u = User::find($record->user->id);
             $value = $record->value_card / 1000;
             $u->diemthuong = $u->diemthuong + $value;
             $u->save();
         }
+        
+        if ($record->status == 1 && $req->status == 2) {
+            $u = User::find($record->user->id);
+            $value = $record->value_card / 1000;
+            $u->diemthuong = $u->diemthuong + $value;
+            $u->save();
+        }
+
+        if ($record->status == 2 && $req->status == 1) {
+            $u = User::find($record->user->id);
+            $value = $record->value_card / 1000;
+            $u->diemthuong = $u->diemthuong - $value;
+            $u->save();
+        }
+        $record->status = $req->status;
+        $record->answer = $req->answer;
+        $record->save();
 
         return response()->json(true);
     }

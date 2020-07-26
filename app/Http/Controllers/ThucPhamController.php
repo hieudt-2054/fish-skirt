@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ThucPham;
+use App\DiemThuong;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\User;
@@ -118,6 +119,7 @@ class ThucPhamController extends Controller
     {
         return response()->json([
             'count' => count(ThucPham::where('status', 0)->get()),
+            'cardRequest' => count(DiemThuong::where('status', 0)->get()),
         ]);
     }
 

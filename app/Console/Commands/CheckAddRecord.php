@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use App\Mail\MailNotify;
+use \Carbon\Carbon;
 use Mail;
 
 class CheckAddRecord extends Command
@@ -42,7 +43,9 @@ class CheckAddRecord extends Command
     {
         $u = User::where('tdee_guide', 1)->where('roles', 0)->get();
         foreach ($u as $user) {
-            if (count($user->eatings) == 0  || count($user->cannangs) == 0) {
+            $eatingsU = $user->eatings->where('ngay', Carbon::now()->format('Y-m-d'));
+            $cannang = $user->cannangs->where('ngay', Carbon::now()->format('Y-m-d'));
+            if (count($eatingsU) == 0  || count($cannang) == 0) {
                 Mail::to($user)->send(new MailNotify($user));
             }
         }

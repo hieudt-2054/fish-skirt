@@ -8,7 +8,7 @@
           <div class="header-content mx-auto">
             <h1 class="mb-5 color-white">
                 FishSkirt là hệ thống đo lường, theo dõi quá trình giảm cân của những người dùng có nhu cầu.
-                Thời buổi này giảm cân dễ dàng khi đã có hệ thống hỗ trợ , gợi ý, nhằm tối ưu được kết quả mong đợi , giảm cân hiệu quả
+                Thời buổi này giảm cân dễ dàng khi đã có hệ thống hỗ trợ, gợi ý, nhằm tối ưu được kết quả mong đợi, giảm cân hiệu quả
             </h1>
             <a href="/register" class="btn btn-outline btn-xl js-scroll-trigger">THAM GIA NGAY BÂY GIỜ!</a>
           </div>
@@ -18,7 +18,7 @@
             <div class="device-mockup iphone6_plus portrait white">
               <div class="device">
                 <div class="screen">
-                    <img src="https://i.ibb.co/vZYJd7V/image.png" class="img-fluid" alt="">
+                    <img src="https://i.ibb.co/QJSz1M3/image.png" class="img-fluid" alt="">
                 </div>
                 <div class="button">
                   <!-- You can hook the "home button" to some JavaScript events or just remove it -->

@@ -56,14 +56,14 @@
       Sản phẩm chờ xử lý <span class="badge badge-danger">{{count}}</span>
       </router-link>
     </el-menu-item>
-    <el-menu-item index="5">
+    <el-menu-item index="5" v-if="user.roles == 0">
       <router-link :to="{ name: 'listPoints' }" class="link">
       Điểm Thưởng: <span class="badge badge-success">{{user.diemthuong}}</span>
        </router-link>
     </el-menu-item>
     <el-menu-item index="6" v-if="user.roles == 1">
       <router-link :to="{ name: 'managePoints' }" class="link">
-      Duyệt thẻ <span class="badge badge-danger">{{count}}</span>
+      Duyệt thẻ <span class="badge badge-danger">{{cardRequest}}</span>
       </router-link>
     </el-menu-item>
   </el-menu>
@@ -137,6 +137,7 @@ export default {
   data: () => ({
     appName: window.config.appName,
     count: 0,
+    cardRequest: 0,
   }),
 
   computed: mapGetters({
@@ -157,6 +158,7 @@ export default {
       await axios.get('/api/prod-req')
       .then((res) => {
         this.count = res.data.count
+        this.cardRequest = res.data.cardRequest
       });
     }
   }
