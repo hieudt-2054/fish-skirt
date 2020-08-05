@@ -79,8 +79,8 @@
           <img src="https://www.asiapacifichealthcaremanagement.org/wp-content/uploads/2020/01/healthcare-background.jpg" alt="">
         </div>
         <div class="popup__text">
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ex velit, viverra non vulputate vitae, blandit vitae nisl. Nullam fermentum orci et erat viverra bibendum. Aliquam sed varius nibh, vitae mattis purus. Mauris elementum sapien non ullamcorper vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eget felis sit amet eros viverra pulvinar.</p>
+          <h1>Đăng ký nhận ưu đãi</h1>
+          <p>Vui lòng truy cập địa chỉ sau để đăng ký tài khoản <a href="/register">[Đăng ký]</a>, sau khi đăng ký xong vui lòng cung cấp cho chúng tôi thông tin sức khoẻ hiện tại của bạn</p>
         </div>
         <a class="popup__close" href="#">X</a>
       </div>
