@@ -1,7 +1,15 @@
 <template>
   <div v-loading="!loaded">
     <el-card class="box-card" >
+      <div class="row" v-if="fixedNumber(dashboard.soCaloConLai) < 1">
+        <el-alert
+    title="Có vẻ hôm nay bạn đã nạp đủ lượng calo rồi"
+    type="warning"
+    show-icon>
+  </el-alert><br/>
+      </div>
       <div class="row"  v-loading="loadedEat" v-if="dashboard.soCalo">
+
         <div class="col-md-3">
           <h5>Số calo hấp thụ trong ngày<br/> <span class="badge badge-success">{{ fixedNumber(dashboard.soCalo.calo) || 0 }}</span></h5>
         </div>
@@ -15,6 +23,7 @@
           <h5>Lần cân nhỏ nhất 7 ngày qua<br/> <span class="badge badge-danger">{{ Math.min.apply(null, dashboard.weight7Day) }} KG</span></h5>
         </div>
       </div>
+      
     </el-card>
     <div class="row mt-3" v-if="dashboard.calo7Day">
       <div class="col-md-6" v-loading="loadedChart2">
