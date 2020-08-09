@@ -89,7 +89,8 @@ export default {
             message: 'Thêm mới bài viết thành công',
             type: 'success'
           })
-          this.formReset()
+
+          this.$router.push({ name: 'listPost' })
         })
         .catch((err) => {
           this.$notify.error({
