@@ -378,6 +378,7 @@
 
 
 <div class="site-section bg-lightx">
+  <div id="fb-root"></div>
   <script>
     window.fbAsyncInit = function() {
       FB.init({

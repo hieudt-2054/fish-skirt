@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="https://md-aqil.github.io/images/swiper.min.css">
    </head>
    <body>
-    <div id="fb-root"></div>
 
   
   <!-- Back to top button -->
