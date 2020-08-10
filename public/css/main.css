@@ -720,6 +720,9 @@
     visibility: hidden;
     z-index: 1000;
   }
+  .fb-customerchat {
+    height: 300px !important;
+  }
   #button::after {
     content: "\f077";
     font-family: FontAwesome;
