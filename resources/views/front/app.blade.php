@@ -30,9 +30,7 @@
   
   <!-- Back to top button -->
   <a id="button"></a>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0"
-      nonce="WxNHVrsz"></script>
+
     <div id="loader-wrapper">
       <div id="loader"></div>
   
