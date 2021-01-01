@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningUnitTests()) {
             Schema::defaultStringLength(191);
         }
-        View::share('categories', Category::all());
+        // View::share('categories', Category::all());
     }
 
     /**

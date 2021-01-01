@@ -2,6 +2,7 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require './vendor/deployer/recipes/recipe/telegram.php';
 
 // Project name
 set('application', 'fish_skirt');
@@ -12,9 +13,15 @@ set('repository', 'git@github.com:hieudt-2054/fish-skirt.git');
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true); 
 
+
+
+
+
+
 // Setup amount version release
 set('keep_releases', 5);
-
+set('telegram_token', '428002508:AAHMjBSqR4uoRd10SZVUoClClfOMjEv1TuU');
+set('telegram_chat_id', '1424550025');
 // Default branch
 set('branch', 'master');
 
@@ -34,7 +41,7 @@ add('shared_dirs', [
     'bootstrap/cache',
 ]);
 // Hosts
-host('34.87.83.104')
+host('13.228.183.239')
     ->user('deploy')
     ->stage('development')
     ->set('deploy_path', '~/{{application}}')
@@ -56,7 +63,7 @@ add('writable_dirs', [
 // Tasks
 task('build-assets', function () {
     run('cd {{release_path}} && npm install');
-    run('cd {{release_path}} && npm run prod');
+    run('cd {{release_path}} && npm run dev');
 });
 
 // Tasks
@@ -65,7 +72,7 @@ task('clear-config', [
     'artisan:config:cache',
     'artisan:view:clear',
     'artisan:view:cache',
-    'artisan:migrate',
+    // 'artisan:migrate',
 ]);
 task('deploy', [
     // outputs the branch and IP address to the command line
@@ -98,12 +105,15 @@ task('deploy', [
     'cleanup',
 ]);
 // // can be used by the user to assign custom tasks to execute on successful deployments
+before('deploy', 'telegram:notify');
 after('deploy', 'success');
-
+after('success', 'telegram:notify:success');
+after('deploy:failed', 'telegram:notify:failure');
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'clear-config');
+
 
 
