@@ -22,7 +22,7 @@
     "cheerio": "^1.0.0-rc.3",
     "ckeditor4-vue": "^1.0.1",
     "element-ui": "^2.13.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "js-cookie": "^2.2.0",
     "moment": "^2.25.3",
     "popper.js": "^1.15.0",
