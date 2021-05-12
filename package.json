@@ -18,7 +18,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "cheerio": "^1.0.0-rc.3",
     "ckeditor4-vue": "^1.0.1",
     "element-ui": "^2.13.1",
